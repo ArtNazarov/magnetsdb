@@ -1,0 +1,94 @@
+object fmViewSingle: TfmViewSingle
+  Left = -4
+  Height = 248
+  Top = 192
+  Width = 1016
+  BorderStyle = bsDialog
+  Caption = 'Viewer'
+  ClientHeight = 248
+  ClientWidth = 1016
+  LCLVersion = '1.4.4.0'
+  object lbCategory: TLabel
+    Left = 0
+    Height = 14
+    Top = 0
+    Width = 1016
+    Align = alTop
+    Caption = 'Категория'
+    ParentColor = False
+  end
+  object lbCaption: TLabel
+    Left = 0
+    Height = 14
+    Top = 38
+    Width = 1016
+    Align = alTop
+    Caption = 'Название'
+    ParentColor = False
+  end
+  object lbLabels: TLabel
+    Left = 0
+    Height = 14
+    Top = 76
+    Width = 1016
+    Align = alTop
+    Caption = 'Метки'
+    ParentColor = False
+  end
+  object lbHash: TLabel
+    Left = 0
+    Height = 14
+    Top = 114
+    Width = 1016
+    Align = alTop
+    Caption = 'Хэш'
+    ParentColor = False
+  end
+  object dispCategory: TLabel
+    Left = 0
+    Height = 24
+    Top = 14
+    Width = 1016
+    Align = alTop
+    Caption = 'dispCategory'
+    Font.Height = -24
+    ParentColor = False
+    ParentFont = False
+    WordWrap = True
+  end
+  object dispCaption: TLabel
+    Left = 0
+    Height = 24
+    Top = 52
+    Width = 1016
+    Align = alTop
+    Caption = 'dispCaption'
+    Font.Height = -24
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+    WordWrap = True
+  end
+  object dispLabels: TLabel
+    Left = 0
+    Height = 24
+    Top = 90
+    Width = 1016
+    Align = alTop
+    Caption = 'dispLabels'
+    Font.Height = -24
+    ParentColor = False
+    ParentFont = False
+    WordWrap = True
+  end
+  object dispHash: TLabel
+    Left = 0
+    Height = 14
+    Top = 128
+    Width = 1016
+    Align = alTop
+    Caption = 'dispHash'
+    ParentColor = False
+    ParentFont = False
+  end
+end

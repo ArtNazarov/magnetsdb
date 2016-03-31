@@ -1,0 +1,619 @@
+object fmMain: TfmMain
+  Left = 119
+  Height = 460
+  Top = 141
+  Width = 674
+  ActiveControl = panTop
+  Caption = 'magnetsdb'
+  ClientHeight = 440
+  ClientWidth = 674
+  KeyPreview = True
+  Menu = fmMenu
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
+  OnKeyPress = FormKeyPress
+  OnResize = FormResize
+  Position = poDesktopCenter
+  ShowHint = True
+  LCLVersion = '1.4.4.0'
+  WindowState = wsMaximized
+  object rightPanel: TPanel
+    Left = 512
+    Height = 366
+    Top = 24
+    Width = 162
+    Align = alRight
+    ClientHeight = 366
+    ClientWidth = 162
+    TabOrder = 0
+    OnClick = rightPanelClick
+    object btnClearUserHistory: TButton
+      Left = 1
+      Height = 27
+      Top = 89
+      Width = 160
+      Align = alTop
+      Caption = 'Сброс истории поиска'
+      OnClick = btnClearUserHistoryClick
+      TabOrder = 4
+    end
+    object tbFontSize: TTrackBar
+      Left = 1
+      Height = 40
+      Top = 116
+      Width = 160
+      Max = 24
+      Min = 8
+      OnChange = tbFontSizeChange
+      Position = 14
+      Align = alTop
+      TabOrder = 5
+    end
+    object chkColorize: TCheckBox
+      Left = 1
+      Height = 21
+      Top = 177
+      Width = 160
+      Align = alTop
+      Caption = 'Альтернативная цветовая'
+      Enabled = False
+      OnChange = chkColorizeChange
+      TabOrder = 6
+    end
+    object chkSearchOnChange: TCheckBox
+      Left = 1
+      Height = 21
+      Top = 47
+      Width = 160
+      Align = alTop
+      Caption = 'Поиск по мере ввода'
+      OnChange = chkSearchOnChangeChange
+      TabOrder = 2
+    end
+    object lbAttrs: TCheckBox
+      Left = 1
+      Height = 21
+      Top = 26
+      Width = 160
+      Align = alTop
+      Caption = 'Атрибуты поиска'
+      OnChange = lbAttrsChange
+      TabOrder = 1
+    end
+    object chkStrictMode: TCheckBox
+      Left = 1
+      Height = 21
+      Top = 68
+      Width = 160
+      Align = alTop
+      Caption = 'Точные совпадения'
+      OnChange = chkStrictModeChange
+      TabOrder = 3
+    end
+    object chkCustomColors: TCheckBox
+      Left = 1
+      Height = 21
+      Top = 156
+      Width = 160
+      Align = alTop
+      Caption = 'Нестандартные цвета'
+      OnChange = chkCustomColorsChange
+      TabOrder = 7
+    end
+    object mmDebug: TMemo
+      Left = 1
+      Height = 167
+      Top = 198
+      Width = 160
+      Align = alClient
+      ScrollBars = ssAutoBoth
+      TabOrder = 8
+    end
+    object btPrevSQL: TButton
+      Left = 1
+      Height = 25
+      Top = 1
+      Width = 160
+      Align = alTop
+      Caption = 'Пред. запрос'
+      OnClick = btPrevSQLClick
+      TabOrder = 0
+    end
+  end
+  object panCenter: TPanel
+    Left = 200
+    Height = 366
+    Top = 24
+    Width = 307
+    Align = alClient
+    Caption = 'panCenter'
+    ClientHeight = 366
+    ClientWidth = 307
+    TabOrder = 4
+    object sqlGrid: TDBGrid
+      Left = 1
+      Height = 364
+      Top = 1
+      Width = 305
+      Align = alClient
+      AutoEdit = False
+      Color = clWindow
+      Columns = <      
+        item
+          Title.Caption = 'Категория'
+          FieldName = 'category'
+        end      
+        item
+          Title.Caption = 'Название'
+          FieldName = 'caption'
+        end      
+        item
+          Title.Caption = 'Метки'
+          FieldName = 'labels'
+        end      
+        item
+          Title.Caption = 'Хэш'
+          FieldName = 'hash'
+        end>
+      Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiselect]
+      PopupMenu = pmDatabase
+      TabOrder = 0
+      OnColumnSized = sqlGridColumnSized
+      OnDblClick = sqlGridDblClick
+      OnTitleClick = sqlGridTitleClick
+    end
+  end
+  object bottomPanel: TPanel
+    Left = 0
+    Height = 50
+    Top = 390
+    Width = 674
+    Align = alBottom
+    ClientHeight = 50
+    ClientWidth = 674
+    TabOrder = 1
+    object btPrevPage: TButton
+      Left = 1
+      Height = 48
+      Hint = 'F5'
+      Top = 1
+      Width = 160
+      Align = alLeft
+      Caption = 'Пред. страница'
+      Enabled = False
+      OnClick = btPrevPageClick
+      TabOrder = 0
+    end
+    object lbPage: TLabel
+      Left = 161
+      Height = 48
+      Hint = 'F2'
+      Top = 1
+      Width = 352
+      Align = alClient
+      Alignment = taCenter
+      Caption = '1'
+      Font.Style = [fsBold]
+      Layout = tlCenter
+      ParentColor = False
+      ParentFont = False
+    end
+    object btNextPage: TButton
+      Left = 513
+      Height = 48
+      Hint = 'F6'
+      Top = 1
+      Width = 160
+      Align = alRight
+      Caption = 'След. страница'
+      OnClick = btNextPageClick
+      TabOrder = 1
+    end
+  end
+  object panTop: TPanel
+    Left = 0
+    Height = 24
+    Top = 0
+    Width = 674
+    Align = alTop
+    Caption = 'panTop'
+    ClientHeight = 24
+    ClientWidth = 674
+    TabOrder = 2
+    object panCategory: TPanel
+      Left = 1
+      Height = 22
+      Top = 1
+      Width = 215
+      Align = alLeft
+      ClientHeight = 22
+      ClientWidth = 215
+      TabOrder = 0
+      object chkCategory: TCheckBox
+        Left = 1
+        Height = 20
+        Top = 1
+        Width = 77
+        Align = alLeft
+        Caption = 'Категория'
+        OnChange = chkCategoryChange
+        TabOrder = 0
+      end
+      object edCategory: TComboBox
+        Left = 78
+        Height = 20
+        Top = 1
+        Width = 136
+        Align = alClient
+        ItemHeight = 0
+        OnChange = edCategoryChange
+        OnEditingDone = edCategoryEditingDone
+        OnKeyDown = edCategoryKeyDown
+        OnSelect = edCategorySelect
+        TabOrder = 1
+        Text = 'Кино, Видео и ТВ'
+      end
+    end
+    object panOtherAttrs: TPanel
+      Left = 221
+      Height = 22
+      Top = 1
+      Width = 452
+      Align = alClient
+      ClientHeight = 22
+      ClientWidth = 452
+      TabOrder = 1
+      object chkLabel: TCheckBox
+        Left = 238
+        Height = 20
+        Top = 1
+        Width = 53
+        Align = alRight
+        Caption = 'Метка'
+        OnChange = chkLabelChange
+        TabOrder = 0
+      end
+      object edLabels: TComboBox
+        Left = 291
+        Height = 20
+        Top = 1
+        Width = 160
+        Align = alRight
+        AutoComplete = True
+        AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
+        ItemHeight = 0
+        OnChange = edLabelsChange
+        OnKeyDown = edLabelsKeyDown
+        TabOrder = 1
+      end
+      object edCaption: TComboBox
+        Left = 1
+        Height = 20
+        Top = 1
+        Width = 237
+        Align = alClient
+        AutoComplete = True
+        AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
+        ItemHeight = 0
+        OnChange = edCaptionChange
+        OnKeyDown = edCaptionKeyDown
+        PopupMenu = pmCaption
+        TabOrder = 2
+      end
+    end
+    object Splitter3: TSplitter
+      Left = 216
+      Height = 22
+      Top = 1
+      Width = 5
+    end
+  end
+  object leftPanel: TPanel
+    Left = 0
+    Height = 366
+    Top = 24
+    Width = 195
+    Align = alLeft
+    ClientHeight = 366
+    ClientWidth = 195
+    TabOrder = 3
+    object lbFavourites: TLabel
+      Left = 1
+      Height = 12
+      Top = 1
+      Width = 193
+      Align = alTop
+      Caption = 'Избранное (закладки)'
+      ParentColor = False
+    end
+    object lbFav: TStringGrid
+      Left = 1
+      Height = 352
+      Top = 13
+      Width = 193
+      Align = alClient
+      AutoEdit = False
+      ColCount = 4
+      ColumnClickSorts = True
+      Columns = <      
+        item
+          Title.Caption = 'Категория'
+        end      
+        item
+          Title.Caption = 'Заголовок'
+        end      
+        item
+          Title.Caption = 'Метки'
+        end      
+        item
+          Title.Caption = 'Хэш'
+        end>
+      FixedCols = 0
+      Flat = True
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowSelect, goSmoothScroll]
+      PopupMenu = pmFav
+      RowCount = 1
+      TabOrder = 0
+      OnDblClick = lbFavDblClick
+      OnHeaderSized = lbFavHeaderSized
+    end
+  end
+  object Splitter1: TSplitter
+    Left = 195
+    Height = 366
+    Top = 24
+    Width = 5
+    OnMoved = Splitter1Moved
+  end
+  object Splitter2: TSplitter
+    Left = 507
+    Height = 366
+    Top = 24
+    Width = 5
+    Align = alRight
+    OnMoved = Splitter2Moved
+    ResizeAnchor = akRight
+  end
+  object pmDatabase: TPopupMenu
+    left = 224
+    top = 200
+    object pmAddToFav: TMenuItem
+      Caption = 'В избранное'
+      OnClick = pmAddToFavClick
+    end
+    object mnuViewSingle: TMenuItem
+      Caption = 'Карточка'
+      OnClick = mnuViewSingleClick
+    end
+    object mnuAppHandlers: TMenuItem
+      Caption = 'Обработчики'
+      object pmAppHandler1: TMenuItem
+        Caption = 'Обработчик 1'
+        OnClick = pmAppHandler1Click
+      end
+      object pmAppHandler2: TMenuItem
+        Caption = 'Обработчик 2'
+        OnClick = pmAppHandler2Click
+      end
+      object pmAppHandler3: TMenuItem
+        Caption = 'Обработчик 3'
+        OnClick = pmAppHandler3Click
+      end
+      object pmAppHandler4: TMenuItem
+        Caption = 'Обработчик 4'
+        OnClick = pmAppHandler4Click
+      end
+    end
+    object mnuDbSearchEngines: TMenuItem
+      Caption = 'Поисковики'
+      object pmDbSearchEngine1: TMenuItem
+        Caption = 'Поисковик 1'
+        OnClick = pmDbSearchEngine1Click
+      end
+      object pmDbSearchEngine2: TMenuItem
+        Caption = 'Поисковик 2'
+        OnClick = pmDbSearchEngine2Click
+      end
+      object pmDbSearchEngine3: TMenuItem
+        Caption = 'Поисковик 3'
+        OnClick = pmDbSearchEngine3Click
+      end
+      object pmDbSearchEngine4: TMenuItem
+        Caption = 'Поисковик 4'
+      end
+      object pmDbSearchEngine5: TMenuItem
+        Caption = 'Поисковик 5'
+      end
+    end
+    object mnuDbOtherActions: TMenuItem
+      Caption = 'Дополнительно...'
+      object pmAddRecord: TMenuItem
+        Caption = 'Добавить запись...'
+        OnClick = pmAddRecordClick
+      end
+      object mnuGetBase: TMenuItem
+        Caption = 'Загрузить базу'
+        OnClick = mnuGetBaseClick
+      end
+      object dbImport: TMenuItem
+        Caption = 'Импорт...'
+        OnClick = dbImportClick
+      end
+      object dbEdit: TMenuItem
+        Caption = 'Изменить...'
+        OnClick = dbEditClick
+      end
+      object dbDelete: TMenuItem
+        Caption = 'Удалить...'
+        OnClick = dbDeleteClick
+      end
+      object dbReindex: TMenuItem
+        Caption = 'Обновить автодополнение'
+        OnClick = dbReindexClick
+      end
+      object pmDbSelectAll: TMenuItem
+        Caption = 'Выделить всё'
+        Visible = False
+        OnClick = pmDbSelectAllClick
+      end
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    left = 72
+    top = 136
+  end
+  object SelectDirectoryDialog1: TSelectDirectoryDialog
+    left = 41
+    top = 215
+  end
+  object pmFav: TPopupMenu
+    left = 57
+    top = 284
+    object FavHandlers: TMenuItem
+      Caption = 'Обработчики'
+      object favHandler1: TMenuItem
+        Caption = 'Обработчик 1'
+        OnClick = favHandler1Click
+      end
+      object favHandler2: TMenuItem
+        Caption = 'Обработчик 2'
+        OnClick = favHandler2Click
+      end
+      object favHandler3: TMenuItem
+        Caption = 'Обработчик 3'
+        OnClick = favHandler3Click
+      end
+      object favHandler4: TMenuItem
+        Caption = 'Обработчик 4'
+        OnClick = favHandler4Click
+      end
+    end
+    object FavSearchEngines: TMenuItem
+      Caption = 'Поисковики'
+      object FavSearchEngine1: TMenuItem
+        Caption = 'Поисковик 1'
+        OnClick = FavSearchEngine1Click
+      end
+      object FavSearchEngine2: TMenuItem
+        Caption = 'Поисковик 2'
+        OnClick = FavSearchEngine2Click
+      end
+      object FavSearchEngine3: TMenuItem
+        Caption = 'Поисковик 3'
+        OnClick = FavSearchEngine3Click
+      end
+      object FavSearchEngine4: TMenuItem
+        Caption = 'Поисковик 4'
+      end
+      object FavSearchEngine5: TMenuItem
+        Caption = 'Поисковик 5'
+      end
+    end
+    object FavOtherActions: TMenuItem
+      Caption = 'Дополнительно...'
+      object favRemoveItem: TMenuItem
+        Caption = 'Удалить из избранного'
+        OnClick = favRemoveItemClick
+      end
+      object favClearAll: TMenuItem
+        Caption = 'Очистить избранное'
+        OnClick = favClearAllClick
+      end
+    end
+  end
+  object tmSQL: TTimer
+    Enabled = False
+    Interval = 200
+    OnTimer = tmSQLTimer
+    left = 349
+    top = 128
+  end
+  object fmMenu: TMainMenu
+    left = 281
+    top = 77
+    object mnuOptions: TMenuItem
+      Caption = 'Конфигурация'
+      object mnuSettings: TMenuItem
+        Caption = 'Основные настройки'
+        OnClick = mnuSettingsClick
+      end
+      object mnuLocalization: TMenuItem
+        Caption = 'Локализация'
+        OnClick = mnuLocalizationClick
+      end
+      object mnuTrList: TMenuItem
+        Caption = 'List of servers'
+        OnClick = mnuTrListClick
+      end
+    end
+    object mnuHelp: TMenuItem
+      Caption = 'Help'
+      object mnuHelpHotkeys: TMenuItem
+        Caption = 'Hotkeys'
+        OnClick = mnuHelpHotkeysClick
+      end
+      object mnuHelpWebSite: TMenuItem
+        Caption = 'WebSite'
+        OnClick = mnuHelpWebSiteClick
+      end
+    end
+    object mnuTools: TMenuItem
+      Caption = 'Tools'
+      object mnuViewSql: TMenuItem
+        Caption = 'View SQL requests'
+        OnClick = mnuViewSqlClick
+      end
+    end
+  end
+  object PopupNotifier1: TPopupNotifier
+    Color = 14483455
+    Icon.Data = {
+      07544269746D617000000000
+    }
+    Text = 'Text'
+    Title = 'Caption'
+    Visible = False
+    OnClose = PopupNotifier1Close
+    left = 288
+    top = 184
+  end
+  object pmCaption: TPopupMenu
+    left = 326
+    top = 47
+    object capSearchEngine1: TMenuItem
+      Caption = 'Поисковик 1'
+      OnClick = capSearchEngine1Click
+    end
+    object capSearchEngine2: TMenuItem
+      Caption = 'Поисковик 2'
+      OnClick = capSearchEngine2Click
+    end
+    object capSearchEngine3: TMenuItem
+      Caption = 'Поисковик 3'
+      OnClick = capSearchEngine3Click
+    end
+    object capSearchEngine4: TMenuItem
+      Caption = 'Поисковик 4'
+      OnClick = capSearchEngine4Click
+    end
+    object capSearchEngine5: TMenuItem
+      Caption = 'Поисковик 5'
+      OnClick = capSearchEngine5Click
+    end
+  end
+  object Timer1: TTimer
+    Interval = 5000
+    OnTimer = Timer1Timer
+    left = 136
+    top = 83
+  end
+  object UniqueInstance1: TUniqueInstance
+    Enabled = True
+    Identifier = 'magnetsdb'
+    UpdateInterval = 100
+    OnOtherInstance = UniqueInstance1OtherInstance
+    left = 208
+    top = 80
+  end
+end

@@ -1,0 +1,113 @@
+object fmAddMagnet: TfmAddMagnet
+  Left = 226
+  Height = 211
+  Top = 215
+  Width = 491
+  BorderStyle = bsDialog
+  Caption = 'Добавить в базу...'
+  ClientHeight = 211
+  ClientWidth = 491
+  OnCreate = FormCreate
+  Position = poDesktopCenter
+  LCLVersion = '1.4.4.0'
+  object lbCategory: TLabel
+    Left = 0
+    Height = 14
+    Top = 0
+    Width = 491
+    Align = alTop
+    Caption = 'Категория'
+    ParentColor = False
+  end
+  object lbCaption: TLabel
+    Left = 0
+    Height = 14
+    Top = 39
+    Width = 491
+    Align = alTop
+    Caption = 'Название'
+    ParentColor = False
+  end
+  object edCaption: TEdit
+    Left = 0
+    Height = 22
+    Top = 53
+    Width = 491
+    Align = alTop
+    TabOrder = 1
+  end
+  object lbLabels: TLabel
+    Left = 0
+    Height = 14
+    Top = 75
+    Width = 491
+    Align = alTop
+    Caption = 'Метки'
+    ParentColor = False
+  end
+  object edLabels: TEdit
+    Left = 0
+    Height = 22
+    Top = 89
+    Width = 491
+    Align = alTop
+    TabOrder = 2
+  end
+  object edCategory: TComboBox
+    Left = 0
+    Height = 25
+    Top = 14
+    Width = 491
+    Align = alTop
+    ItemHeight = 0
+    TabOrder = 0
+  end
+  object btInsertHash: TButton
+    Left = 0
+    Height = 64
+    Top = 147
+    Width = 147
+    Align = alLeft
+    Caption = 'Вставить хэш по ссылке'
+    OnClick = btInsertHashClick
+    TabOrder = 4
+  end
+  object btInsertToDb: TButton
+    Left = 147
+    Height = 64
+    Top = 147
+    Width = 213
+    Align = alClient
+    Caption = 'Добавить в базу'
+    ModalResult = 1
+    OnClick = btInsertToDbClick
+    TabOrder = 5
+  end
+  object lbHash: TLabel
+    Left = 0
+    Height = 14
+    Top = 111
+    Width = 491
+    Align = alTop
+    Caption = 'Хэш'
+    ParentColor = False
+  end
+  object edHash: TEdit
+    Left = 0
+    Height = 22
+    Top = 125
+    Width = 491
+    Align = alTop
+    TabOrder = 3
+  end
+  object btCancel: TButton
+    Left = 360
+    Height = 64
+    Top = 147
+    Width = 131
+    Align = alRight
+    Caption = 'Отмена'
+    ModalResult = 2
+    TabOrder = 6
+  end
+end

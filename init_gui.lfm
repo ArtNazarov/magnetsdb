@@ -1,0 +1,21 @@
+object fmInit: TfmInit
+  Left = 176
+  Height = 241
+  Top = 238
+  Width = 667
+  Caption = 'InitApp'
+  ClientHeight = 241
+  ClientWidth = 667
+  LCLVersion = '1.4.4.0'
+  object mmInit: TMemo
+    Left = 0
+    Height = 241
+    Top = 0
+    Width = 667
+    Align = alClient
+    Lines.Strings = (
+      'magnetsdb'
+    )
+    TabOrder = 0
+  end
+end

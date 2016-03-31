@@ -1,0 +1,103 @@
+object fmEditor: TfmEditor
+  Left = 227
+  Height = 185
+  Top = 237
+  Width = 320
+  BorderStyle = bsDialog
+  Caption = 'Правка'
+  ClientHeight = 185
+  ClientWidth = 320
+  OnCreate = FormCreate
+  Position = poDesktopCenter
+  LCLVersion = '1.4.4.0'
+  object lbCategory: TLabel
+    Left = 0
+    Height = 15
+    Top = 0
+    Width = 320
+    Align = alTop
+    Caption = 'Категория'
+    ParentColor = False
+  end
+  object lbCaption: TLabel
+    Left = 0
+    Height = 15
+    Top = 42
+    Width = 320
+    Align = alTop
+    Caption = 'Заголовок'
+    ParentColor = False
+  end
+  object edCategory: TComboBox
+    Left = 0
+    Height = 27
+    Top = 15
+    Width = 320
+    Align = alTop
+    ItemHeight = 0
+    TabOrder = 0
+  end
+  object edCaption: TEdit
+    Left = 0
+    Height = 21
+    Top = 57
+    Width = 320
+    Align = alTop
+    TabOrder = 1
+  end
+  object lbLabels: TLabel
+    Left = 0
+    Height = 15
+    Top = 78
+    Width = 320
+    Align = alTop
+    Caption = 'Метки'
+    ParentColor = False
+  end
+  object edLabels: TEdit
+    Left = 0
+    Height = 21
+    Top = 93
+    Width = 320
+    Align = alTop
+    TabOrder = 2
+  end
+  object lbHash: TLabel
+    Left = 0
+    Height = 15
+    Top = 114
+    Width = 320
+    Align = alTop
+    Caption = 'Хэш'
+    ParentColor = False
+  end
+  object edHash: TEdit
+    Left = 0
+    Height = 21
+    Top = 129
+    Width = 320
+    Align = alTop
+    TabOrder = 3
+  end
+  object btOK: TButton
+    Left = 0
+    Height = 35
+    Top = 150
+    Width = 152
+    Align = alLeft
+    Caption = 'OK'
+    ModalResult = 1
+    OnClick = btOKClick
+    TabOrder = 4
+  end
+  object btCancel: TButton
+    Left = 152
+    Height = 35
+    Top = 150
+    Width = 168
+    Align = alClient
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 5
+  end
+end

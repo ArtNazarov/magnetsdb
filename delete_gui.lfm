@@ -1,0 +1,105 @@
+object fmDelete: TfmDelete
+  Left = 329
+  Height = 198
+  Top = 253
+  Width = 320
+  BorderStyle = bsDialog
+  Caption = 'Удаление...'
+  ClientHeight = 198
+  ClientWidth = 320
+  LCLVersion = '1.4.4.0'
+  object lbCategory: TLabel
+    Left = 0
+    Height = 14
+    Top = 0
+    Width = 320
+    Align = alTop
+    Caption = 'Категория'
+    ParentColor = False
+  end
+  object edCategory: TEdit
+    Left = 0
+    Height = 22
+    Top = 14
+    Width = 320
+    Align = alTop
+    Enabled = False
+    TabOrder = 0
+  end
+  object lbCaption: TLabel
+    Left = 0
+    Height = 14
+    Top = 36
+    Width = 320
+    Align = alTop
+    Caption = 'Название'
+    ParentColor = False
+  end
+  object edCaption: TEdit
+    Left = 0
+    Height = 22
+    Top = 50
+    Width = 320
+    Align = alTop
+    Enabled = False
+    TabOrder = 1
+  end
+  object lbLabels: TLabel
+    Left = 0
+    Height = 14
+    Top = 72
+    Width = 320
+    Align = alTop
+    Caption = 'Метки'
+    ParentColor = False
+  end
+  object edLabels: TEdit
+    Left = 0
+    Height = 22
+    Top = 86
+    Width = 320
+    Align = alTop
+    Enabled = False
+    TabOrder = 2
+  end
+  object lbHash: TLabel
+    Left = 0
+    Height = 14
+    Top = 108
+    Width = 320
+    Align = alTop
+    Caption = 'Хэш'
+    ParentColor = False
+  end
+  object edHash: TEdit
+    Left = 0
+    Height = 22
+    Top = 122
+    Width = 320
+    Align = alTop
+    Enabled = False
+    TabOrder = 3
+  end
+  object btOk: TButton
+    Left = 0
+    Height = 54
+    Top = 144
+    Width = 163
+    Align = alLeft
+    Caption = 'OK'
+    ModalResult = 1
+    OnClick = btOkClick
+    TabOrder = 4
+  end
+  object btCancel: TButton
+    Left = 163
+    Height = 54
+    Top = 144
+    Width = 157
+    Align = alClient
+    Caption = 'Отмена'
+    ModalResult = 2
+    OnClick = btCancelClick
+    TabOrder = 5
+  end
+end
