@@ -892,9 +892,9 @@ end;
 procedure TfmMain.readsettings;
 var
  inif : TIniFile;
- k : byte;
+ k : integer;
  fs : Integer;
- i, j  : byte;
+ i, j  : integer;
  w  : TStringList;
 begin
 
@@ -1119,7 +1119,7 @@ begin
 end;
 
 procedure TfmMain.ccCategoryClickCheck(Sender: TObject);
-var i : byte; r : String;
+var i : integer; r : String;
 begin
 
   for i:=0 to ccCategory.items.count-1 do
@@ -1135,7 +1135,7 @@ end;
 
 procedure TfmMain.ccCategoryItemClick(Sender: TObject; Index: integer);
 begin
-
+  //ccCategory.Checked[index]:=not ccCategory.Checked[index];
 end;
 
 procedure TfmMain.chkCategoryChange(Sender: TObject);
