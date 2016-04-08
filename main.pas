@@ -147,6 +147,7 @@ type
     procedure capSearchEngine4Click(Sender: TObject);
     procedure capSearchEngine5Click(Sender: TObject);
     procedure ccCategoryClickCheck(Sender: TObject);
+    procedure ccCategoryDblClick(Sender: TObject);
     procedure ccCategoryItemClick(Sender: TObject; Index: integer);
     procedure chkCategoryChange(Sender: TObject);
     procedure chkCustomColorsChange(Sender: TObject);
@@ -239,6 +240,7 @@ type
   public
      // settings, session data, logic flags
      loading_checkboxes : boolean;
+     dontchangelist : boolean;
      action_to_do : String;
      inserted_link : String;
      used_app : String;
@@ -1133,7 +1135,17 @@ begin
       else
         r:=r+';'+ccCategory.Items[i];
     end;
+  dontchangelist:=true;
   edCategory.text:=r;
+  dontchangelist:=false;
+end;
+
+procedure TfmMain.ccCategoryDblClick(Sender: TObject);
+var i : integer;
+begin
+  ccCategory.Clear;
+  for i:=0 to CategoriesFullList.Count-1 do
+    ccCategory.Items.Add(CategoriesFullList[i]);
 end;
 
 procedure TfmMain.ccCategoryItemClick(Sender: TObject; Index: integer);
@@ -1392,8 +1404,7 @@ begin
 end;
 
 procedure TfmMain.edCategoryChange(Sender: TObject);
-
-
+var i : integer;
 begin
 
   if not chkSearchOnChange.Checked then Exit
@@ -1417,20 +1428,29 @@ procedure TfmMain.edCategoryEditingDone(Sender: TObject);
 var
 
 Filter: string;
-i: Integer;
+i, j: Integer;
+w : TStringList;
 begin
+ if dontchangelist then exit;
        Filter := edCategory.Text;
-
+  w:=TStringList.Create();
+  w.clear;
+  if Pos(';', Filter)>0 then
+          Split(';', Filter, w)
+  else
+    w.add(Filter);
+  w.SaveToFile('lines.txt');
   if Length(Filter)>0 then
 begin
      ccCategory.Items.Clear;
 //     edCategory.DroppedDown := True;
-
+   for j:=0 to w.Count-1 do
      for i := 0 to CategoriesFullList.Count - 1 do
-       if Pos(UpperCase(Filter), UpperCase(CategoriesFullList[i]))<>0 then
+       if Pos(UpperCase(w.Strings[j]), UpperCase(CategoriesFullList[i]))<>0 then
            ccCategory.Items.Add(CategoriesFullList[i]);
 
 end;
+ w.Free;
 (*else
 begin
     edCategory.Items.Clear;
