@@ -238,6 +238,7 @@ type
 
   public
      // settings, session data, logic flags
+     loading_checkboxes : boolean;
      action_to_do : String;
      inserted_link : String;
      used_app : String;
@@ -735,6 +736,7 @@ var
    i : Byte;
 
 begin
+  loading_checkboxes:=false;
   IF not FileExists(ss) then
   begin
     Inif := TINIFile.Create(ss);
@@ -939,7 +941,7 @@ begin
     load_locale(used_lang);
 
     // load state of checkboxes
-
+    loading_checkboxes:=true;
     edCategory.text:=Inif.ReadString('controls', 'category', 'test');
     w:=TStringList.Create();
     w.clear;
@@ -955,6 +957,7 @@ begin
            end;
         end;
    w.free;
+   loading_checkboxes:=false;
 
 
 
@@ -1121,7 +1124,7 @@ end;
 procedure TfmMain.ccCategoryClickCheck(Sender: TObject);
 var i : integer; r : String;
 begin
-
+  if loading_checkboxes then exit;
   for i:=0 to ccCategory.items.count-1 do
    if ccCategory.Checked[i] then
     begin
