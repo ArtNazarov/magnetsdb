@@ -14,9 +14,10 @@ uses
   Process,  AsyncProcess, clipbrd, INIFiles,  Grids,
   user_fav,
   user_history,
+  str_common_funcs,
   db_funcs,
   LCLType,
-  LCLProc, PopupNotifier,  UTF8Process,
+  LCLProc, PopupNotifier, ComboEx, CheckLst,  UTF8Process,
   add_magnet_gui,
   gui_importer_csv,
   gui_editor,
@@ -44,12 +45,14 @@ type
     btPrevPage: TButton;
     btNextPage: TButton;
     btPrevSQL: TButton;
+    btMultiSelect: TButton;
+    ccCategory: TCheckListBox;
     chkCategory: TCheckBox;
     chkCustomColors: TCheckBox;
     chkLabel: TCheckBox;
     chkStrictMode: TCheckBox;
     edCaption: TComboBox;
-    edCategory: TComboBox;
+    edCategory: TEdit;
     edLabels: TComboBox;
     lbAttrs: TCheckBox;
     chkSearchOnChange: TCheckBox;
@@ -124,6 +127,7 @@ type
     Splitter1: TSplitter;
     Splitter2: TSplitter;
     Splitter3: TSplitter;
+    Splitter4: TSplitter;
     sqlGrid: TDBGrid;
     lbFav: TStringGrid;
     tbFontSize: TTrackBar;
@@ -131,6 +135,7 @@ type
     tmSQL: TTimer;
     UniqueInstance1: TUniqueInstance;
 
+    procedure btMultiSelectClick(Sender: TObject);
     procedure btnClearUserHistoryClick(Sender: TObject);
     procedure btPrevPageClick(Sender: TObject);
 
@@ -141,6 +146,8 @@ type
     procedure capSearchEngine3Click(Sender: TObject);
     procedure capSearchEngine4Click(Sender: TObject);
     procedure capSearchEngine5Click(Sender: TObject);
+    procedure ccCategoryClickCheck(Sender: TObject);
+    procedure ccCategoryItemClick(Sender: TObject; Index: integer);
     procedure chkCategoryChange(Sender: TObject);
     procedure chkCustomColorsChange(Sender: TObject);
     procedure chkLabelChange(Sender: TObject);
@@ -254,6 +261,8 @@ type
      last_labels : String;
      last_category : String;
 
+
+
      md : TMagnets_Entity;
 
     procedure initsettings();
@@ -303,6 +312,7 @@ implementation
 procedure TfmMain.initapplication;
 var history_sql : TStringList;
 begin
+
  ptr_history:=-1;
  if FileExists('sql.txt') then
     begin
@@ -584,12 +594,12 @@ user_fav.load_fav(lbFav);
 user_history.loadusersearches(edCaption);
 // TODO change loading categories
 if not FileExists('categories.txt') then reindex();
-edCategory.Items.loadfromfile('categories.txt');
-edCategory.ItemIndex:=0; // select first category
+ccCategory.Items.loadfromfile('categories.txt');
+ccCategory.ItemIndex:=0; // select first category
 CategoriesFullList:=TStringList.Create();
 
-For I:=0 to edCategory.Items.Count-1 do
-         CategoriesFullList.Add(edCategory.Items[i]);
+For I:=0 to ccCategory.Items.Count-1 do
+         CategoriesFullList.Add(ccCategory.Items[i]);
 
 CategoriesFullList.Sorted:=True;
 
@@ -884,7 +894,8 @@ var
  inif : TIniFile;
  k : byte;
  fs : Integer;
- i  : byte;
+ i, j  : byte;
+ w  : TStringList;
 begin
 
   IF (FileExists(ss))then
@@ -930,6 +941,23 @@ begin
     // load state of checkboxes
 
     edCategory.text:=Inif.ReadString('controls', 'category', 'test');
+    w:=TStringList.Create();
+    w.clear;
+    if edCategory.text<>'' then
+      if Pos(';', edCategory.text)>0 then
+        begin
+          Split(';', edCategory.text, w);
+          for i:=0 to ccCategory.Count-1 do
+            for j:=0 to w.Count-1 do
+           begin
+                if w.Strings[j]=ccCategory.Items[i] then
+                  ccCategory.Checked[i]:=true;
+           end;
+        end;
+   w.free;
+
+
+
     edCaption.text:=Inif.ReadString('controls', 'caption', 'test');
     edLabels.text:=Inif.ReadString('controls', 'labels', 'test');
 
@@ -1023,6 +1051,18 @@ begin
      end;
 end;
 
+procedure TfmMain.btMultiSelectClick(Sender: TObject);
+var i : integer;
+begin
+  if (ccCategory.Visible=false) and (ccCategory.items.Count=0) then
+  begin
+     ccCategory.clear;
+     for i:=0 to ccCategory.items.Count-1 do
+       ccCategory.Items.add(ccCategory.items[i]);
+  end;
+  ccCategory.Visible:=not ccCategory.Visible;
+end;
+
 procedure TfmMain.btPrevPageClick(Sender: TObject);
 begin
   prevpageaction();
@@ -1076,6 +1116,26 @@ end;
 procedure TfmMain.capSearchEngine5Click(Sender: TObject);
 begin
   open_search_engine(2, 5);
+end;
+
+procedure TfmMain.ccCategoryClickCheck(Sender: TObject);
+var i : byte; r : String;
+begin
+
+  for i:=0 to ccCategory.items.count-1 do
+   if ccCategory.Checked[i] then
+    begin
+      if r='' then
+        r:=ccCategory.Items[i]
+      else
+        r:=r+';'+ccCategory.Items[i];
+    end;
+  edCategory.text:=r;
+end;
+
+procedure TfmMain.ccCategoryItemClick(Sender: TObject; Index: integer);
+begin
+
 end;
 
 procedure TfmMain.chkCategoryChange(Sender: TObject);
@@ -1332,6 +1392,7 @@ procedure TfmMain.edCategoryChange(Sender: TObject);
 
 
 begin
+
   if not chkSearchOnChange.Checked then Exit
   else
   begin
@@ -1346,6 +1407,7 @@ begin
      rq();
      end;
   end;
+
 end;
 
 procedure TfmMain.edCategoryEditingDone(Sender: TObject);
@@ -1358,12 +1420,12 @@ begin
 
   if Length(Filter)>0 then
 begin
-     edCategory.Items.Clear;
+     ccCategory.Items.Clear;
 //     edCategory.DroppedDown := True;
 
      for i := 0 to CategoriesFullList.Count - 1 do
        if Pos(UpperCase(Filter), UpperCase(CategoriesFullList[i]))<>0 then
-           edCategory.Items.Add(CategoriesFullList[i]);
+           ccCategory.Items.Add(CategoriesFullList[i]);
 
 end;
 (*else
@@ -1376,7 +1438,7 @@ end;*)
 //edCategory.DroppedDown:=(edCategory.Items.Count<>0) and (Length(edCategory.Text)<>0);
 edCategory.Text:=Filter;
 edCategory.SelStart:=Length(edCategory.Text);
-edCategory.Hint:=IntToStr(edCategory.Items.Count);
+ccCategory.Hint:=IntToStr(ccCategory.Items.Count);
 end;
 
 procedure TfmMain.edCategoryKeyDown(Sender: TObject; var Key: Word;
@@ -1491,7 +1553,7 @@ begin
      chkCategory.Show;
      edCategory.Show;
      edCategory.SetFocus;
-     edCategory.DroppedDown:=True;
+     //edCategory.DroppedDown:=True;
      end;
   if (vk_Insert = Key) and not (ssAlt in Shift) then
      pmAddRecord.Click;

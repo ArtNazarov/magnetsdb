@@ -55,17 +55,19 @@ history_sql : TStringList;
  sqlStr_cat, sqlStr_lab : String;
  limits : String;
  l : TStringList;
+ w : TStringList;
  i : Integer;
  last_query : String;
 begin
-   l:=TStringList.Create;
+l:=TStringList.Create;
 l.clear;
+w:=TStringList.Create;
+w.clear;
 sqlStr_cat:='';
 sqlStr_lab:='';
 gen:='';
-
+w.clear;
 sorting_order:=sqlSort();
-
 if where_value<>'' then
            case mode of
             0 :
@@ -78,8 +80,24 @@ if where_value<>'' then
            end;
             end;
 
+if  (category <> '') and (Pos(';', category)=0) then
+  begin
+  sqlStr_cat:=' ( category = "'+category+'" ) '
+  end
+else if (category <> '') and (Pos(';', category)>0) then
+ begin
+ Split(';', category, w);
+ for i:=0 to w.Count-1 do
+  begin
+      if i = 0 then
+           sqlStr_cat:='  ( category = "'+w.Strings[i]+'" ) '
 
-if  category <> '' then sqlStr_cat:=' ( category = "'+category+'" ) ';
+     else
+           sqlStr_cat:=sqlStr_cat+' OR ( category = "'+w.Strings[i]+'" ) ';
+ end;
+
+ sqlStr_cat := ' ( '+ sqlStr_cat + ' ) ';
+ end;
 if  labels <> '' then
    begin
      if Pos(' ', labels)>0 then
@@ -140,6 +158,7 @@ else
         last_query:='';
    end;
 l.free;
+w.free;
 if last_query<>sqlText then
    begin
    history_sql.LoadFromFile('sql.txt');
