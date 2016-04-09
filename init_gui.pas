@@ -5,7 +5,8 @@ unit init_gui;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls;
+  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
+  ExtCtrls;
 
 type
 
@@ -28,6 +29,9 @@ implementation
 {$R *.lfm}
 
 { TfmInit }
+
+
+
 
 procedure TfmInit.m(msg: String);
 begin

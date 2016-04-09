@@ -1,7 +1,7 @@
 object fmMain: TfmMain
-  Left = -22
+  Left = -4
   Height = 460
-  Top = 137
+  Top = 145
   Width = 674
   ActiveControl = panTop
   Caption = 'magnetsdb'
@@ -133,8 +133,8 @@ object fmMain: TfmMain
     TabOrder = 4
     object sqlGrid: TDBGrid
       Left = 1
-      Height = 86
-      Top = 280
+      Height = 365
+      Top = 1
       Width = 305
       Align = alClient
       AutoEdit = False
@@ -162,29 +162,6 @@ object fmMain: TfmMain
       OnColumnSized = sqlGridColumnSized
       OnDblClick = sqlGridDblClick
       OnTitleClick = sqlGridTitleClick
-    end
-    object ccCategory: TCheckListBox
-      Left = 1
-      Height = 274
-      Top = 1
-      Width = 305
-      Align = alTop
-      ItemHeight = 0
-      OnClickCheck = ccCategoryClickCheck
-      OnDblClick = ccCategoryDblClick
-      OnItemClick = ccCategoryItemClick
-      TabOrder = 1
-      TopIndex = -1
-      Visible = False
-    end
-    object Splitter4: TSplitter
-      Cursor = crVSplit
-      Left = 1
-      Height = 5
-      Top = 275
-      Width = 305
-      Align = alTop
-      ResizeAnchor = akTop
     end
   end
   object bottomPanel: TPanel
@@ -351,7 +328,7 @@ object fmMain: TfmMain
     object lbFavourites: TLabel
       Left = 1
       Height = 15
-      Top = 1
+      Top = 160
       Width = 193
       Align = alTop
       Caption = 'Избранное (закладки)'
@@ -359,8 +336,8 @@ object fmMain: TfmMain
     end
     object lbFav: TStringGrid
       Left = 1
-      Height = 350
-      Top = 16
+      Height = 191
+      Top = 175
       Width = 193
       Align = alClient
       AutoEdit = False
@@ -387,6 +364,29 @@ object fmMain: TfmMain
       TabOrder = 0
       OnDblClick = lbFavDblClick
       OnHeaderSized = lbFavHeaderSized
+    end
+    object ccCategory: TCheckListBox
+      Left = 1
+      Height = 154
+      Top = 1
+      Width = 193
+      Align = alTop
+      ItemHeight = 0
+      OnClickCheck = ccCategoryClickCheck
+      OnDblClick = ccCategoryDblClick
+      OnItemClick = ccCategoryItemClick
+      TabOrder = 1
+      TopIndex = -1
+      Visible = False
+    end
+    object Splitter4: TSplitter
+      Cursor = crVSplit
+      Left = 1
+      Height = 5
+      Top = 155
+      Width = 193
+      Align = alTop
+      ResizeAnchor = akTop
     end
   end
   object Splitter1: TSplitter

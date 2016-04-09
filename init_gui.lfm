@@ -1,12 +1,12 @@
 object fmInit: TfmInit
-  Left = 176
+  Left = 116
   Height = 241
-  Top = 238
+  Top = 328
   Width = 667
   Caption = 'InitApp'
   ClientHeight = 241
   ClientWidth = 667
-  LCLVersion = '1.4.4.0'
+  LCLVersion = '1.6.0.4'
   object mmInit: TMemo
     Left = 0
     Height = 241
@@ -16,6 +16,8 @@ object fmInit: TfmInit
     Lines.Strings = (
       'magnetsdb'
     )
+    ReadOnly = True
+    ScrollBars = ssAutoBoth
     TabOrder = 0
   end
 end

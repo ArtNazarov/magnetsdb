@@ -904,24 +904,33 @@ begin
 
   IF (FileExists(ss))then
   begin
+    m.m('File '+ss+' was found');
     Inif := TINIFile.Create(ss);
     used_app := Inif.readString('general', 'app', '');
+    m.m('Reading used_app:'+used_app);
     used_vplayer := Inif.readString('general', 'vplayer', '');
+    m.m('Reading vplayer:'+used_vplayer);
     used_altapp := Inif.readString('general', 'altapp', '');
+    m.m('Reading altapp:'+used_altapp);
     used_altapp4 := Inif.readString('general', 'altapp4', '');
+    m.m('Reading altapp4:'+used_altapp4);
     use_external_browser := Inif.readBool('browser', 'external', false);
+    m.m('Reading use_external_browser:'+BoolToStr(use_external_browser));
 
      // columns width
      // main table
      for k:=0 to 3 do
      sqlGrid.Columns[k].Width:=StrToInt(Inif.ReadString('general', 'c'+IntToStr(k), '32'));
+     m.m('Sql columns widths were readed');
      // bookmarks
      for k:=0 to 3 do
      lbFav.Columns[k].Width:=StrToInt(Inif.ReadString('general', 'f'+IntToStr(k), '32'));
+     m.m('Bookmarks columns widths were readed');
     // panel visibility
     fmMain.leftPanel.visible:=Inif.ReadString('general', 'lp', 'YES')='YES';
     fmMain.rightPanel.visible:=Inif.ReadString('general', 'rp', 'YES')='YES';
     fmMain.bottomPanel.visible:=Inif.ReadString('general', 'bp', 'YES')='YES';
+    m.m('Panels visibility was readed');
 
     fmMain.leftPanel.width:=StrToInt(Inif.ReadString('general', 'lw', '150'));
     fmMain.rightPanel.width:=StrToInt(Inif.ReadString('general', 'rw', '150'));
@@ -930,6 +939,7 @@ begin
     //fmMain.Left:=StrToInt(Inif.ReadString('general', 'al', '0'));
     fmMain.Width:=StrToInt(Inif.ReadString('general', 'aw', '600'));
     fmMain.Height:=StrToInt(Inif.ReadString('general', 'ah', '400'));
+     m.m('Form width and height were readed');
 
     // font size
     fs:=StrToInt(Inif.ReadString('general', 'fs', '14'));
@@ -943,6 +953,7 @@ begin
     load_locale(used_lang);
 
     // load state of checkboxes
+    m.m('Starts loading state of checkboxes');
     loading_checkboxes:=true;
     edCategory.text:=Inif.ReadString('controls', 'category', 'test');
     w:=TStringList.Create();
@@ -954,12 +965,16 @@ begin
           for i:=0 to ccCategory.Count-1 do
             for j:=0 to w.Count-1 do
            begin
+                Application.ProcessMessages;
                 if w.Strings[j]=ccCategory.Items[i] then
                   ccCategory.Checked[i]:=true;
            end;
         end;
    w.free;
    loading_checkboxes:=false;
+
+
+   m.m('Loading state of checkboxes was ended');
 
 
 
@@ -1003,11 +1018,14 @@ begin
 
    warn_empty_category:=Inif.ReadBool('confirmations', 'warn_empty_category', true);
 
+
    md.page:=Inif.ReadInteger('sql', 'page', 1);
 
    if md.page>1 then btPrevPage.Enabled:=true;
 
    updater_magic:=Inif.ReadString('updater', 'magic', magic);
+
+   m.m('Read other parameters was completed');
 
   End;
 end;
@@ -1127,6 +1145,7 @@ procedure TfmMain.ccCategoryClickCheck(Sender: TObject);
 var i : integer; r : String;
 begin
   if loading_checkboxes then exit;
+  r:='';
   for i:=0 to ccCategory.items.count-1 do
    if ccCategory.Checked[i] then
     begin
@@ -1439,11 +1458,12 @@ begin
           Split(';', Filter, w)
   else
     w.add(Filter);
-  w.SaveToFile('lines.txt');
+  //w.SaveToFile('lines.txt');
   if Length(Filter)>0 then
 begin
      ccCategory.Items.Clear;
 //     edCategory.DroppedDown := True;
+ if (w.count>=1) and (CategoriesFullList.Count>=1) then
    for j:=0 to w.Count-1 do
      for i := 0 to CategoriesFullList.Count - 1 do
        if Pos(UpperCase(w.Strings[j]), UpperCase(CategoriesFullList[i]))<>0 then

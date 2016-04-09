@@ -1,3 +1,7 @@
+What's new
+===========================
+Search in several categories
+
 How to build app from sources
 ===========================
 Goto http://sourceforge.net/projects/lazarus/
