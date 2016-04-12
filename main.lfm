@@ -1,5 +1,5 @@
 object fmMain: TfmMain
-  Left = -4
+  Left = 0
   Height = 460
   Top = 145
   Width = 674

@@ -287,6 +287,7 @@ type
     procedure attrs_show();
     procedure open_browser(url : String);
     procedure open_search_engine(source : byte; index : byte);
+    procedure set_font_size(fs : Integer);
 
 
     procedure startApp();
@@ -569,6 +570,15 @@ begin
   Inif.Free;
   url:=url+q;
   open_browser(url);
+end;
+
+procedure TfmMain.set_font_size(fs: Integer);
+begin
+  sqlGrid.Font.Size:=fs;
+  sqlGrid.DefaultRowHeight:=fs+4;
+  lbFav.Font.Size:=fs;
+  lbFav.DefaultRowHeight:=fs+4;
+  ccCategory.Font.Size:=fs;
 end;
 
 procedure TfmMain.startApp;
@@ -944,8 +954,7 @@ begin
     // font size
     fs:=StrToInt(Inif.ReadString('general', 'fs', '14'));
     tbFontSize.Position:=fs;
-    sqlGrid.Font.Size:=fs;
-    sqlGrid.DefaultRowHeight:=fs+4;
+    set_font_size(fs);
 
     chkColorize.Checked:=Inif.ReadString('general', 'nightmode', 'NO')='YES';
 
@@ -1945,10 +1954,7 @@ end;
 
 procedure TfmMain.tbFontSizeChange(Sender: TObject);
 begin
-  sqlGrid.Font.Size:=tbFontSize.Position;
-  sqlGrid.DefaultRowHeight:=tbFontSize.Position+4;
-  lbFav.Font.Size:=tbFontSize.Position;
-  lbFav.DefaultRowHeight:=tbFontSize.Position+4;
+  set_font_size(tbFontSize.Position);
   save_settings_to_ini();
 end;
 
