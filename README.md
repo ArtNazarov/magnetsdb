@@ -3,6 +3,7 @@ What's new
 - Search in several categories
 - Stop words e.g search request "-Third;Quest" will find
 "Thine First", "Second Thing" but not "Third Quest" or "Quest Third"
+(available for requests by captions or labels)
 
 How to build app from sources
 ===========================
