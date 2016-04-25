@@ -1,27 +1,8 @@
 What's new
 ===========================
-Search in several categories
-
-Quick tip for Linux users
-===========================
-You can greatly accelerate search by installing
-app and database to RAM drive.
-
-For example, execute with root
-```
-mkdir /mnt/tmpfs
-chmod 777 /mnt/tmpfs/
-mount -t tmpfs -o size=1024M tmpfs /mnt/tmpfs/
-```
-Copy files (main-sqlite.db, magnetsdb, settings.ini, sql.txt,
-tr.txt) to /mnt/tmpfs
-
-Run magnetsdb from /mnt/tmpfs
-
-You can unmount RAM drive (with root) 
-```
-unmount -v /mnt/tmpfs
-```
+- Search in several categories
+- Stop words e.g search request "-Third;Quest" will find
+"Thine First", "Second Thing" but not "Third Quest" or "Quest Third"
 
 How to build app from sources
 ===========================
