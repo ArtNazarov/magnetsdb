@@ -55,7 +55,7 @@ history_sql : TStringList;
  sqlStr_cat, sqlStr_lab : String;
  limits : String;
  l : TStringList;
- w : TStringList;
+ w, m : TStringList;
  i : Integer;
  last_query : String;
 begin
@@ -63,12 +63,15 @@ l:=TStringList.Create;
 l.clear;
 w:=TStringList.Create;
 w.clear;
+m:=TStringList.Create;
+m.clear;
 sqlStr_cat:='';
 sqlStr_lab:='';
 gen:='';
 w.clear;
 sorting_order:=sqlSort();
-if where_value<>'' then
+  if  (where_value <> '') and (Pos(';', where_value)=0) then
+   begin
            case mode of
             0 :
               begin
@@ -79,6 +82,38 @@ if where_value<>'' then
            gen:=' ( ( UPPER(TRIM('+search_field  +')) >= UPPER("'+where_value+'") ) AND ( UPPER(TRIM('+search_field +')) <= UPPER("'+where_value+'яяя") ) )';
            end;
             end;
+   end
+  else if (where_value <> '') and (Pos(';', where_value)>0) then
+  begin
+
+  Split(';', where_value, m);
+ for i:=0 to m.Count-1 do
+  begin
+      if i = 0 then
+        begin
+        if m[i]<>'' then
+           if m[i][1]<>'-' then
+           gen:=' UPPER('+search_field +') LIKE UPPER("%'+m[i]+'%") ';
+        if m[i]<>'' then
+           if m[i][1]='-' then
+           gen:=' NOT UPPER('+search_field +') LIKE UPPER("%'+Copy(m[i], 2, length(m[i]))+'%") ';
+        end
+     else
+      begin
+        if m[i]<>'' then
+           if m[i][1]<>'-' then
+        gen:=gen+'AND UPPER('+search_field +') LIKE UPPER("%'+m[i]+'%") ';
+        if m[i]<>'' then
+           if m[i][1]='-' then
+        gen:=gen+'AND NOT UPPER('+search_field +') LIKE UPPER("%'+Copy(m[i], 2, length(m[i]))+'%") ';
+      end;
+ end;
+
+ gen := ' ( '+ gen + ' ) ';
+
+
+
+  end;
 
 if  (category <> '') and (Pos(';', category)=0) then
   begin
