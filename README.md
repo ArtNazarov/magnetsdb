@@ -1,8 +1,8 @@
 What's new
 ===========================
 - Search in several categories
-- Stop words e.g search request "-Third;Quest" will find
-"Thine First", "Second Thing" but not "Third Quest" or "Quest Third"
+- Stop words e.g search request "-Third;Thing" will find
+"Thing First", "Second Thing" but not "Third Thing" or "Thing Third"
 (available for requests by captions or labels)
 
 How to build app from sources
