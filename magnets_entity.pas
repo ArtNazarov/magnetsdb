@@ -133,13 +133,18 @@ else if (category <> '') and (Pos(';', category)>0) then
 
  sqlStr_cat := ' ( '+ sqlStr_cat + ' ) ';
  end;
+// Adding labels
 if  labels <> '' then
    begin
      if Pos(' ', labels)>0 then
        begin
        Split(' ', labels, l);
        for i:=0 to l.Count-1 do
+
           if i=0 then
+           begin
+           if (l[i][1]<>'-') then
+            // Inclusion
             case mode of
             0 : begin
                 sqlStr_lab:= sqlStr_lab + ' ( UPPER(labels) LIKE UPPER("%'+l.Strings[i]+'%") ) '
@@ -149,24 +154,65 @@ if  labels <> '' then
                 end;
             end
           else
-           case mode of
-          0 : begin
-              sqlStr_lab:= sqlStr_lab + ' AND ( UPPER(labels) LIKE UPPER("%'+l.Strings[i]+'%") ) ';
-              end;
-          1 : begin
-              sqlStr_lab:= sqlStr_lab + ' AND ( ( UPPER(labels) >= UPPER("'+l.Strings[i]+'") ) AND ( UPPER(labels) <= UPPER("'+l.Strings[i]+'яяя") ) ) ';
-                  end
-           end;
-       end else
-               case mode of
+          // Exclusion
+            case mode of
+            0 : begin
+                sqlStr_lab:= sqlStr_lab + ' ( NOT UPPER(labels) LIKE UPPER("%'+Copy(l.Strings[i], 2, Length(l.Strings[i]))+'%") ) '
+                end;
+            1 : begin
+                sqlStr_lab:= sqlStr_lab + ' ( NOT ( ( UPPER(labels) >= UPPER("'+Copy(l.Strings[i], 2, Length(l.Strings[i]))+'") ) AND ( UPPER(labels) <= UPPER("'+Copy(l.Strings[i], 2, Length(l.Strings[i]))+'яяя") ) ) ) ';
+                end;
+            end
+          end
+                    else // if i <> 0
+                      if (l[i][1]<>'-') then
+                         begin
+                                    case mode of
+                                              0 : begin
+                  sqlStr_lab:= sqlStr_lab + ' AND ( UPPER(labels) LIKE UPPER("%'+l.Strings[i]+'%") ) ';
+                                                   end;
+                                              1 : begin
+                  sqlStr_lab:= sqlStr_lab + ' AND ( ( UPPER(labels) >= UPPER("'+l.Strings[i]+'") ) AND ( UPPER(labels) <= UPPER("'+l.Strings[i]+'яяя") ) ) ';
+                                                  end
+                                    end;
+
+
+                         end
+                    else begin
+
+                                     case mode of
+                                              0 : begin
+                  sqlStr_lab:= sqlStr_lab + ' AND ( NOT UPPER(labels) LIKE UPPER("%'+Copy(l.Strings[i], 2,Length(l.Strings[i]))+'%") ) ';
+                                                   end;
+                                              1 : begin
+                  sqlStr_lab:= sqlStr_lab + ' AND ( NOT ( ( UPPER(labels) >= UPPER("'+Copy(l.Strings[i], 2,Length(l.Strings[i]))+'") ) AND ( UPPER(labels) <= UPPER("'+Copy(l.Strings[i], 2, Length(l.Strings[i]))+'яяя") ) ) ) ';
+                                                  end
+                                    end;
+
+                    end;
+
+       end
+      else // ' ' not find
+       if labels[1]<>'-' then
+          case mode of
                0 : begin
                     sqlStr_lab:=' ( UPPER(labels) LIKE UPPER("%'+labels+'%") ) ';
                    end;
                1 : begin
                     sqlStr_lab:=' ( ( UPPER(labels) >= UPPER("'+labels+'") ) AND ( UPPER(labels) <= UPPER("'+labels+'яяя") )  ) ';
                    end
-               end
+          end
+      else
+        case mode of
+               0 : begin
+                    sqlStr_lab:=' ( NOT UPPER(labels) LIKE UPPER("%'+Copy(labels, 2, Length(labels))+'%") ) ';
+                   end;
+               1 : begin
+                    sqlStr_lab:=' ( NOT ( ( UPPER(labels) >= UPPER("'+Copy(labels, 2, Length(labels))+'") ) AND ( UPPER(labels) <= UPPER("'+Copy(labels, 2, Length(labels))+'яяя") )  ) ) ';
+                   end
+          end
    end;
+
 if  labels <> '' then
      if gen <> '' then
          gen:='(' + gen + ') AND ' + sqlStr_lab
@@ -196,7 +242,8 @@ l.free;
 w.free;
 if last_query<>sqlText then
    begin
-   history_sql.LoadFromFile('sql.txt');
+   if FileExists('sql.txt') then
+      history_sql.LoadFromFile('sql.txt');
    history_sql.Add(sqlText);
    history_sql.SaveToFile('sql.txt');
    end;
