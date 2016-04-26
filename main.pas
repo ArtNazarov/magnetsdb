@@ -1993,6 +1993,7 @@ var
   c : Char;
   aColor : TColor;
   aBackground : TColor;
+  fs : TFontStyle;
 begin
 
  c:=possibleLabels.Items[Index][1];
@@ -2000,15 +2001,18 @@ begin
       '-' :   begin
                    aColor:=clWhite;
                    aBackground:=clRed;
+                   fs := fsStrikeOut;
                end;
             '+' :    begin
                    aColor:=clWhite;
                    aBackground:=clGreen;
+                   fs := fsBold;
                end;
       else
       begin
           aColor:=clBlack;
           aBackground:=clWhite;
+          fs := fsItalic;
       end;
  end;
 
@@ -2017,7 +2021,7 @@ with possibleLabels do
  Canvas.Font.Color := aColor;
  Canvas.Brush.Color := aBackground;
  Canvas.FillRect(ARect);
- Canvas.Font.Bold:=True;
+ Canvas.Font.Style:=[fs];
  Canvas.TextRect(ARect, 2, ARect.Top+2, Items[Index]);
            end;
 end;
