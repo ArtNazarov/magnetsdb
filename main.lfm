@@ -1,7 +1,7 @@
 object fmMain: TfmMain
-  Left = 172
+  Left = 182
   Height = 460
-  Top = 169
+  Top = 115
   Width = 674
   ActiveControl = panTop
   Caption = 'magnetsdb'
@@ -31,7 +31,7 @@ object fmMain: TfmMain
     object btnClearUserHistory: TButton
       Left = 1
       Height = 27
-      Top = 104
+      Top = 273
       Width = 160
       Align = alTop
       Caption = 'Сброс истории поиска'
@@ -41,7 +41,7 @@ object fmMain: TfmMain
     object tbFontSize: TTrackBar
       Left = 1
       Height = 48
-      Top = 131
+      Top = 300
       Width = 160
       Max = 24
       Min = 8
@@ -53,7 +53,7 @@ object fmMain: TfmMain
     object chkColorize: TCheckBox
       Left = 1
       Height = 26
-      Top = 205
+      Top = 364
       Width = 160
       Align = alTop
       Caption = 'Альтернативная цветовая'
@@ -64,7 +64,7 @@ object fmMain: TfmMain
     object chkSearchOnChange: TCheckBox
       Left = 1
       Height = 26
-      Top = 52
+      Top = 221
       Width = 160
       Align = alTop
       Caption = 'Поиск по мере ввода'
@@ -74,7 +74,7 @@ object fmMain: TfmMain
     object lbAttrs: TCheckBox
       Left = 1
       Height = 26
-      Top = 26
+      Top = 195
       Width = 160
       Align = alTop
       Caption = 'Атрибуты поиска'
@@ -84,7 +84,7 @@ object fmMain: TfmMain
     object chkStrictMode: TCheckBox
       Left = 1
       Height = 26
-      Top = 78
+      Top = 247
       Width = 160
       Align = alTop
       Caption = 'Точные совпадения'
@@ -94,7 +94,7 @@ object fmMain: TfmMain
     object chkCustomColors: TCheckBox
       Left = 1
       Height = 26
-      Top = 179
+      Top = 348
       Width = 160
       Align = alTop
       Caption = 'Нестандартные цвета'
@@ -103,8 +103,8 @@ object fmMain: TfmMain
     end
     object mmDebug: TMemo
       Left = 1
-      Height = 133
-      Top = 231
+      Height = 36
+      Top = 364
       Width = 160
       Align = alClient
       ScrollBars = ssAutoBoth
@@ -113,12 +113,37 @@ object fmMain: TfmMain
     object btPrevSQL: TButton
       Left = 1
       Height = 25
-      Top = 1
+      Top = 170
       Width = 160
       Align = alTop
       Caption = 'Пред. запрос'
       OnClick = btPrevSQLClick
       TabOrder = 0
+    end
+    object possibleLabels: TListBox
+      Left = 1
+      Height = 144
+      Top = 26
+      Width = 160
+      Align = alTop
+      ItemHeight = 0
+      OnClick = possibleLabelsClick
+      OnDblClick = possibleLabelsDblClick
+      OnDrawItem = possibleLabelsDrawItem
+      ScrollWidth = 156
+      TabOrder = 9
+      TopIndex = -1
+    end
+    object btPossibleLabelsApply: TButton
+      Left = 1
+      Height = 25
+      Top = 1
+      Width = 160
+      Align = alTop
+      Caption = '^^^'
+      OnClick = btPossibleLabelsApplyClick
+      TabOrder = 10
+      Visible = False
     end
   end
   object panCenter: TPanel
@@ -234,7 +259,7 @@ object fmMain: TfmMain
         Left = 1
         Height = 20
         Top = 1
-        Width = 91
+        Width = 88
         Align = alLeft
         Caption = 'Категория'
         OnChange = chkCategoryChange
@@ -251,10 +276,10 @@ object fmMain: TfmMain
         TabOrder = 1
       end
       object edCategory: TEdit
-        Left = 92
+        Left = 89
         Height = 20
         Top = 1
-        Width = 92
+        Width = 95
         Align = alClient
         OnChange = edCategoryChange
         OnEditingDone = edCategoryEditingDone
@@ -272,7 +297,7 @@ object fmMain: TfmMain
       ClientWidth = 452
       TabOrder = 1
       object chkLabel: TCheckBox
-        Left = 227
+        Left = 200
         Height = 20
         Top = 1
         Width = 64
@@ -280,9 +305,10 @@ object fmMain: TfmMain
         Caption = 'Метка'
         OnChange = chkLabelChange
         TabOrder = 0
+        Visible = False
       end
       object edLabels: TComboBox
-        Left = 291
+        Left = 264
         Height = 20
         Top = 1
         Width = 160
@@ -293,12 +319,13 @@ object fmMain: TfmMain
         OnChange = edLabelsChange
         OnKeyDown = edLabelsKeyDown
         TabOrder = 1
+        Visible = False
       end
       object edCaption: TComboBox
         Left = 1
         Height = 20
         Top = 1
-        Width = 226
+        Width = 199
         Align = alClient
         AutoComplete = True
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
@@ -307,6 +334,17 @@ object fmMain: TfmMain
         OnKeyDown = edCaptionKeyDown
         PopupMenu = pmCaption
         TabOrder = 2
+      end
+      object btPossibleLabels: TButton
+        Left = 424
+        Height = 20
+        Top = 1
+        Width = 27
+        Align = alRight
+        Caption = '...'
+        OnClick = btPossibleLabelsClick
+        TabOrder = 3
+        Visible = False
       end
     end
     object Splitter3: TSplitter

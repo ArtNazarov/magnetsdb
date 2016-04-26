@@ -5,7 +5,6 @@ unit main;
 interface
 
 
-
 uses
   Classes, SysUtils,
   dbf, sqlite3conn, sqldb, // database units
@@ -29,11 +28,13 @@ uses
   viewsingle_gui,
   magnets_entity, UniqueInstance,
   wndgrid
- (*, internal_browser *);
+ (*, internal_browser *), Types;
 
 const
 
   url_sitereadme : String = 'https://github.com/ArtNazarov/magnetsdb/blob/master/README.md';
+  plFilename = 'possible-labels.txt';
+
 
 type
 
@@ -46,7 +47,10 @@ type
     btNextPage: TButton;
     btPrevSQL: TButton;
     btMultiSelect: TButton;
+    btPossibleLabels: TButton;
+    btPossibleLabelsApply: TButton;
     ccCategory: TCheckListBox;
+    possibleLabels: TListBox;
     chkCategory: TCheckBox;
     chkCustomColors: TCheckBox;
     chkLabel: TCheckBox;
@@ -137,6 +141,8 @@ type
 
     procedure btMultiSelectClick(Sender: TObject);
     procedure btnClearUserHistoryClick(Sender: TObject);
+    procedure btPossibleLabelsApplyClick(Sender: TObject);
+    procedure btPossibleLabelsClick(Sender: TObject);
     procedure btPrevPageClick(Sender: TObject);
 
     procedure btNextPageClick(Sender: TObject);
@@ -209,6 +215,10 @@ type
     procedure pmInsertHashClick(Sender: TObject);
     procedure PopupNotifier1Close(Sender: TObject; var CloseAction: TCloseAction
       );
+    procedure possibleLabelsClick(Sender: TObject);
+    procedure possibleLabelsDblClick(Sender: TObject);
+    procedure possibleLabelsDrawItem(Control: TWinControl; Index: Integer;
+      ARect: TRect; State: TOwnerDrawState);
     procedure rightPanelClick(Sender: TObject);
     procedure Splitter1Moved(Sender: TObject);
     procedure Splitter2Moved(Sender: TObject);
@@ -522,6 +532,9 @@ begin
   chkCategory.Visible:=lbAttrs.Checked;
   edLabels.Visible:=lbAttrs.Checked;
   edCategory.Visible:=lbAttrs.Checked;
+  btPossibleLabels.Visible:=lbAttrs.Checked;
+  btPossibleLabelsApply.Visible:=lbAttrs.Checked;
+  possibleLabels.Visible:=lbAttrs.Checked;
 end;
 
 procedure TfmMain.open_browser(url: String);
@@ -746,6 +759,7 @@ procedure TfmMain.initsettings;
 var
    IniF:TINIFile;
    i : Byte;
+   qq : TMemo;
 
 begin
   loading_checkboxes:=false;
@@ -845,6 +859,16 @@ begin
 
   End;
 
+
+  if Not FileExists(plFilename) then
+    begin
+      qq:=TMemo.Create(Self);
+      qq.Clear;
+      qq.Lines.Add('RUS');
+      qq.Lines.Add('ENG');
+      qq.Lines.SaveToFile(plFilename);
+      qq.Free;
+    end;
 
 
 end;
@@ -1037,6 +1061,12 @@ begin
    m.m('Read other parameters was completed');
 
   End;
+
+  if FileExists(plFilename) then
+     begin
+          possibleLabels.Items.LoadFromFile(plFilename);
+     end;
+
 end;
 
 
@@ -1081,6 +1111,39 @@ begin
        history_sql.SaveToFile('sql.txt');
        history_sql.Free;
      end;
+end;
+
+procedure TfmMain.btPossibleLabelsApplyClick(Sender: TObject);
+var r : String; q, h, i, l : integer; C : char;
+begin
+
+
+         r:='';
+         q:=-1;
+
+       for i:=0 to possibleLabels.Count-1 do
+          begin
+               q:=q+1;
+               C:=possibleLabels.items[i][1];
+               l:=length(possibleLabels.Items[i]);
+               if  (c = '+') or (c='-') then
+                  begin
+                       h:=0;
+                       if c='+' then h:=1;
+                       if q=0 then
+                       r:=Copy(possibleLabels.items[i], 1+h, l)
+                         else
+                       r:=r+' '+Copy(possibleLabels.items[i], 1+h, l);
+                  end;
+          end;
+      edLabels.text:=r;
+
+end;
+
+procedure TfmMain.btPossibleLabelsClick(Sender: TObject);
+begin
+  possibleLabels.Visible := not possibleLabels.Visible;
+  btPossibleLabelsApply.Visible :=   possibleLabels.Visible;
 end;
 
 procedure TfmMain.btMultiSelectClick(Sender: TObject);
@@ -1899,6 +1962,59 @@ begin
 
 end;
 
+procedure TfmMain.possibleLabelsClick(Sender: TObject);
+begin
+
+end;
+
+procedure TfmMain.possibleLabelsDblClick(Sender: TObject);
+var p : Integer; l : Integer; c : char;
+begin
+ p:=possibleLabels.ItemIndex;
+ l:=Length(possibleLabels.Items[p]);
+ c:=possibleLabels.Items[p][1];
+ if p = -1 then exit;
+   if (c <> '+') and (c<> '-') then
+         possibleLabels.Items[p]:= '-' +  possibleLabels.Items[p]
+  else
+      if c = '-' then
+          possibleLabels.Items[p]:= '+' +  Copy (  possibleLabels.Items[p], 2, Length(possibleLabels.Items[p]))
+  else
+      if c ='+' then
+          possibleLabels.Items[p]:= Copy (  possibleLabels.Items[p], 2, Length(possibleLabels.Items[p]));
+
+
+end;
+
+procedure TfmMain.possibleLabelsDrawItem(Control: TWinControl; Index: Integer;
+  ARect: TRect; State: TOwnerDrawState);
+var c : Char;
+begin
+ c:=possibleLabels.Items[Index][1];
+ case c of
+      '-' :   begin
+    possibleLabels.Canvas.Brush.Color := clRed;
+    possibleLabels.Canvas.Pen.Color:=clRed;
+    possibleLabels.Canvas.Font.Color := clRed;
+               end;
+            '+' :   begin
+    possibleLabels.Canvas.Brush.Color := clGreen;
+    possibleLabels.Canvas.Pen.Color:=clGreen;
+    possibleLabels.Canvas.Font.Color := clGreen;
+               end;
+      else
+      begin
+
+      end;
+ end;
+
+
+
+possibleLabels.Canvas.FillRect(ARect);
+possibleLabels.Canvas.TextRect(ARect, ARect.Left + 2, ARect.Top + 2, possibleLabels.Items[Index])
+end;
+
+
 procedure TfmMain.rightPanelClick(Sender: TObject);
 begin
 
@@ -2075,9 +2191,9 @@ var
 begin
   //Label1.Caption:=Format('A new instance was created with %d parameter(s):', [Count]);
  (*
-  ListBox1.Clear;
+  possibleLabels.Clear;
   for i := 0 to Count - 1 do
-    ListBox1.Items.Add(Parameters[i]);
+    possibleLabels.Items.Add(Parameters[i]);
   BringToFront;
   //hack to force app bring to front
   FormStyle := fsSystemStayOnTop;
