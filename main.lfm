@@ -131,6 +131,7 @@ object fmMain: TfmMain
       OnDblClick = possibleLabelsDblClick
       OnDrawItem = possibleLabelsDrawItem
       ScrollWidth = 156
+      Style = lbOwnerDrawFixed
       TabOrder = 9
       TopIndex = -1
     end

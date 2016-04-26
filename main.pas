@@ -1988,30 +1988,38 @@ end;
 
 procedure TfmMain.possibleLabelsDrawItem(Control: TWinControl; Index: Integer;
   ARect: TRect; State: TOwnerDrawState);
-var c : Char;
+var
+
+  c : Char;
+  aColor : TColor;
+  aBackground : TColor;
 begin
+
  c:=possibleLabels.Items[Index][1];
  case c of
       '-' :   begin
-    possibleLabels.Canvas.Brush.Color := clRed;
-    possibleLabels.Canvas.Pen.Color:=clRed;
-    possibleLabels.Canvas.Font.Color := clRed;
+                   aColor:=clWhite;
+                   aBackground:=clRed;
                end;
-            '+' :   begin
-    possibleLabels.Canvas.Brush.Color := clGreen;
-    possibleLabels.Canvas.Pen.Color:=clGreen;
-    possibleLabels.Canvas.Font.Color := clGreen;
+            '+' :    begin
+                   aColor:=clWhite;
+                   aBackground:=clGreen;
                end;
       else
       begin
-
+          aColor:=clBlack;
+          aBackground:=clWhite;
       end;
  end;
 
-
-
-possibleLabels.Canvas.FillRect(ARect);
-possibleLabels.Canvas.TextRect(ARect, ARect.Left + 2, ARect.Top + 2, possibleLabels.Items[Index])
+with possibleLabels do
+      begin
+ Canvas.Font.Color := aColor;
+ Canvas.Brush.Color := aBackground;
+ Canvas.FillRect(ARect);
+ Canvas.Font.Bold:=True;
+ Canvas.TextRect(ARect, 2, ARect.Top+2, Items[Index]);
+           end;
 end;
 
 
