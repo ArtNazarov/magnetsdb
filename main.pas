@@ -43,23 +43,27 @@ type
   { TfmMain }
 
   TfmMain = class(TLocalizedForm)
+    btLoadLabels: TButton;
     btnClearUserHistory: TButton;
+    btPossibleLabels: TButton;
+    btPossibleLabelsApply: TButton;
     btPrevPage: TButton;
     btNextPage: TButton;
     btPrevSQL: TButton;
     btMultiSelect: TButton;
-    btPossibleLabels: TButton;
-    btPossibleLabelsApply: TButton;
-    btLoadLabels: TButton;
     ccCategory: TCheckListBox;
-    possibleLabels: TListBox;
+    chkLabel: TCheckBox;
+    edLabels: TComboBox;
+    lbCaptionForRq: TLabel;
+    panCaption: TPanel;
+    panPossibleLabels: TPanel;
+    panMainOps: TPanel;
+    panOtherAttrs: TPanel;
     chkCategory: TCheckBox;
     chkCustomColors: TCheckBox;
-    chkLabel: TCheckBox;
     chkStrictMode: TCheckBox;
     edCaption: TComboBox;
     edCategory: TEdit;
-    edLabels: TComboBox;
     lbAttrs: TCheckBox;
     chkSearchOnChange: TCheckBox;
     chkColorize: TCheckBox;
@@ -94,7 +98,6 @@ type
     mnuViewSingle: TMenuItem;
     mnuGetBase: TMenuItem;
     panCategory: TPanel;
-    panOtherAttrs: TPanel;
     pmDbSearchEngine5: TMenuItem;
     pmDbSearchEngine4: TMenuItem;
     mnuSettings: TMenuItem;
@@ -128,12 +131,14 @@ type
     pmFav: TPopupMenu;
     pmCaption: TPopupMenu;
     PopupNotifier1: TPopupNotifier;
+    possibleLabels: TListBox;
     rightPanel: TPanel;
     SelectDirectoryDialog1: TSelectDirectoryDialog;
     Splitter1: TSplitter;
     Splitter2: TSplitter;
     Splitter3: TSplitter;
     Splitter4: TSplitter;
+    Splitter7: TSplitter;
     sqlGrid: TDBGrid;
     lbFav: TStringGrid;
     tbFontSize: TTrackBar;
@@ -253,6 +258,7 @@ type
   public
      // settings, session data, logic flags
      loading_checkboxes : boolean;
+     do_load_labels_by_category : boolean;
      dontchangelist : boolean;
      action_to_do : String;
      inserted_link : String;
@@ -539,6 +545,7 @@ begin
   btPossibleLabels.Visible:=lbAttrs.Checked;
   btPossibleLabelsApply.Visible:=lbAttrs.Checked;
   possibleLabels.Visible:=lbAttrs.Checked;
+  panOtherAttrs.Visible:=lbAttrs.Checked;
 end;
 
 procedure TfmMain.open_browser(url: String);
@@ -1117,9 +1124,8 @@ begin
      begin
           possibleLabels.Items.LoadFromFile(plFilename);
      end;
-
-  load_labels_by_category();
-
+  do_load_labels_by_category:=Inif.ReadBool('sql', 'labelsbycat', false);
+  if (do_load_labels_by_category) then load_labels_by_category();
 end;
 
 
@@ -1195,8 +1201,9 @@ end;
 
 procedure TfmMain.btPossibleLabelsClick(Sender: TObject);
 begin
-  possibleLabels.Visible := not possibleLabels.Visible;
-  btPossibleLabelsApply.Visible :=   possibleLabels.Visible;
+  panPossibleLabels.Visible:= not possibleLabels.Visible;
+  possibleLabels.Visible := panPossibleLabels.Visible;
+  btPossibleLabelsApply.Visible :=   panPossibleLabels.Visible;
 end;
 
 procedure TfmMain.btMultiSelectClick(Sender: TObject);
@@ -1213,7 +1220,7 @@ end;
 
 procedure TfmMain.btLoadLabelsClick(Sender: TObject);
 begin
-  load_labels_by_category();
+  if (do_load_labels_by_category) then load_labels_by_category();
 end;
 
 procedure TfmMain.btPrevPageClick(Sender: TObject);
@@ -1289,8 +1296,7 @@ begin
   dontchangelist:=false;
 
   // TODO: optionally by settings.ini
-  load_labels_by_category();
-
+  if (do_load_labels_by_category) then load_labels_by_category();
 end;
 
 procedure TfmMain.ccCategoryDblClick(Sender: TObject);
@@ -2265,7 +2271,7 @@ var
   i:Integer;
 *)
 begin
-  //Label1.Caption:=Format('A new instance was created with %d parameter(s):', [Count]);
+  //lbCaptionForRq.Caption:=Format('A new instance was created with %d parameter(s):', [Count]);
  (*
   possibleLabels.Clear;
   for i := 0 to Count - 1 do

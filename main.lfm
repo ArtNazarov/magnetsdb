@@ -1,12 +1,12 @@
 object fmMain: TfmMain
-  Left = 182
-  Height = 460
+  Left = -439
+  Height = 463
   Top = 115
-  Width = 674
+  Width = 909
   ActiveControl = panTop
   Caption = 'magnetsdb'
-  ClientHeight = 439
-  ClientWidth = 674
+  ClientHeight = 442
+  ClientWidth = 909
   KeyPreview = True
   Menu = fmMenu
   OnClose = FormClose
@@ -19,161 +19,191 @@ object fmMain: TfmMain
   LCLVersion = '1.6.0.4'
   WindowState = wsMaximized
   object rightPanel: TPanel
-    Left = 512
-    Height = 365
+    Left = 747
+    Height = 368
     Top = 24
     Width = 162
     Align = alRight
-    ClientHeight = 365
+    ClientHeight = 368
     ClientWidth = 162
     TabOrder = 0
     OnClick = rightPanelClick
-    object btnClearUserHistory: TButton
+    object panPossibleLabels: TPanel
       Left = 1
-      Height = 27
-      Top = 298
-      Width = 160
-      Align = alTop
-      Caption = 'Сброс истории поиска'
-      OnClick = btnClearUserHistoryClick
-      TabOrder = 4
-    end
-    object tbFontSize: TTrackBar
-      Left = 1
-      Height = 48
-      Top = 325
-      Width = 160
-      Max = 24
-      Min = 8
-      OnChange = tbFontSizeChange
-      Position = 14
-      Align = alTop
-      TabOrder = 5
-    end
-    object chkColorize: TCheckBox
-      Left = 1
-      Height = 26
-      Top = 364
-      Width = 160
-      Align = alTop
-      Caption = 'Альтернативная цветовая'
-      Enabled = False
-      OnChange = chkColorizeChange
-      TabOrder = 6
-    end
-    object chkSearchOnChange: TCheckBox
-      Left = 1
-      Height = 26
-      Top = 246
-      Width = 160
-      Align = alTop
-      Caption = 'Поиск по мере ввода'
-      OnChange = chkSearchOnChangeChange
-      TabOrder = 2
-    end
-    object lbAttrs: TCheckBox
-      Left = 1
-      Height = 26
-      Top = 220
-      Width = 160
-      Align = alTop
-      Caption = 'Атрибуты поиска'
-      OnChange = lbAttrsChange
-      TabOrder = 1
-    end
-    object chkStrictMode: TCheckBox
-      Left = 1
-      Height = 26
-      Top = 272
-      Width = 160
-      Align = alTop
-      Caption = 'Точные совпадения'
-      OnChange = chkStrictModeChange
-      TabOrder = 3
-    end
-    object chkCustomColors: TCheckBox
-      Left = 1
-      Height = 26
-      Top = 364
-      Width = 160
-      Align = alTop
-      Caption = 'Нестандартные цвета'
-      OnChange = chkCustomColorsChange
-      TabOrder = 7
-    end
-    object mmDebug: TMemo
-      Left = 1
-      Height = 36
-      Top = 364
-      Width = 160
-      Align = alClient
-      ScrollBars = ssAutoBoth
-      TabOrder = 8
-    end
-    object btPrevSQL: TButton
-      Left = 1
-      Height = 25
-      Top = 195
-      Width = 160
-      Align = alTop
-      Caption = 'Пред. запрос'
-      OnClick = btPrevSQLClick
-      TabOrder = 0
-    end
-    object possibleLabels: TListBox
-      Left = 1
-      Height = 144
-      Top = 51
-      Width = 160
-      Align = alTop
-      ItemHeight = 0
-      OnClick = possibleLabelsClick
-      OnDblClick = possibleLabelsDblClick
-      OnDrawItem = possibleLabelsDrawItem
-      ScrollWidth = 156
-      Sorted = True
-      Style = lbOwnerDrawFixed
-      TabOrder = 9
-      TopIndex = -1
-    end
-    object btPossibleLabelsApply: TButton
-      Left = 1
-      Height = 25
-      Top = 26
-      Width = 160
-      Align = alTop
-      Caption = '^^^'
-      OnClick = btPossibleLabelsApplyClick
-      TabOrder = 10
-      Visible = False
-    end
-    object btLoadLabels: TButton
-      Left = 1
-      Height = 25
+      Height = 135
       Top = 1
       Width = 160
       Align = alTop
-      Caption = 'Load Labels By Category'
-      OnClick = btLoadLabelsClick
-      TabOrder = 11
+      ClientHeight = 135
+      ClientWidth = 160
+      TabOrder = 0
       Visible = False
+      object btLoadLabels: TButton
+        Left = 1
+        Height = 25
+        Top = 1
+        Width = 158
+        Align = alTop
+        Caption = 'Load Labels By Category'
+        OnClick = btLoadLabelsClick
+        TabOrder = 0
+        Visible = False
+      end
+      object btPossibleLabelsApply: TButton
+        Left = 1
+        Height = 25
+        Top = 26
+        Width = 158
+        Align = alTop
+        Caption = '^^^'
+        OnClick = btPossibleLabelsApplyClick
+        TabOrder = 1
+        Visible = False
+      end
+      object possibleLabels: TListBox
+        Left = 1
+        Height = 83
+        Top = 51
+        Width = 158
+        Align = alClient
+        ItemHeight = 0
+        OnClick = possibleLabelsClick
+        OnDblClick = possibleLabelsDblClick
+        OnDrawItem = possibleLabelsDrawItem
+        ScrollWidth = 154
+        Sorted = True
+        Style = lbOwnerDrawFixed
+        TabOrder = 2
+        TopIndex = -1
+      end
+    end
+    object panMainOps: TPanel
+      Left = 1
+      Height = 226
+      Top = 141
+      Width = 160
+      Align = alClient
+      ClientHeight = 226
+      ClientWidth = 160
+      TabOrder = 1
+      object btPrevSQL: TButton
+        Left = 1
+        Height = 25
+        Top = 1
+        Width = 158
+        Align = alTop
+        Caption = 'Пред. запрос'
+        OnClick = btPrevSQLClick
+        TabOrder = 0
+      end
+      object mmDebug: TMemo
+        Left = 1
+        Height = 36
+        Top = 225
+        Width = 158
+        Align = alClient
+        ScrollBars = ssAutoBoth
+        TabOrder = 1
+      end
+      object chkStrictMode: TCheckBox
+        Left = 1
+        Height = 26
+        Top = 78
+        Width = 158
+        Align = alTop
+        Caption = 'Точные совпадения'
+        OnChange = chkStrictModeChange
+        TabOrder = 2
+      end
+      object chkCustomColors: TCheckBox
+        Left = 1
+        Height = 26
+        Top = 205
+        Width = 158
+        Align = alTop
+        Caption = 'Нестандартные цвета'
+        OnChange = chkCustomColorsChange
+        TabOrder = 3
+      end
+      object chkSearchOnChange: TCheckBox
+        Left = 1
+        Height = 26
+        Top = 52
+        Width = 158
+        Align = alTop
+        Caption = 'Поиск по мере ввода'
+        OnChange = chkSearchOnChangeChange
+        TabOrder = 4
+      end
+      object lbAttrs: TCheckBox
+        Left = 1
+        Height = 26
+        Top = 26
+        Width = 158
+        Align = alTop
+        Caption = 'Атрибуты поиска'
+        OnChange = lbAttrsChange
+        TabOrder = 5
+      end
+      object chkColorize: TCheckBox
+        Left = 1
+        Height = 26
+        Top = 179
+        Width = 158
+        Align = alTop
+        Caption = 'Альтернативная цветовая'
+        Enabled = False
+        OnChange = chkColorizeChange
+        TabOrder = 6
+      end
+      object tbFontSize: TTrackBar
+        Left = 1
+        Height = 48
+        Top = 131
+        Width = 158
+        Max = 24
+        Min = 8
+        OnChange = tbFontSizeChange
+        Position = 14
+        Align = alTop
+        TabOrder = 7
+      end
+      object btnClearUserHistory: TButton
+        Left = 1
+        Height = 27
+        Top = 104
+        Width = 158
+        Align = alTop
+        Caption = 'Сброс истории поиска'
+        OnClick = btnClearUserHistoryClick
+        TabOrder = 8
+      end
+    end
+    object Splitter3: TSplitter
+      Cursor = crVSplit
+      Left = 1
+      Height = 5
+      Top = 136
+      Width = 160
+      Align = alTop
+      ResizeAnchor = akTop
     end
   end
   object panCenter: TPanel
     Left = 200
-    Height = 365
+    Height = 368
     Top = 24
-    Width = 307
+    Width = 542
     Align = alClient
     Caption = 'panCenter'
-    ClientHeight = 365
-    ClientWidth = 307
+    ClientHeight = 368
+    ClientWidth = 542
     TabOrder = 4
     object sqlGrid: TDBGrid
       Left = 1
-      Height = 363
+      Height = 366
       Top = 1
-      Width = 305
+      Width = 540
       Align = alClient
       AutoEdit = False
       Color = clWindow
@@ -205,11 +235,11 @@ object fmMain: TfmMain
   object bottomPanel: TPanel
     Left = 0
     Height = 50
-    Top = 389
-    Width = 674
+    Top = 392
+    Width = 909
     Align = alBottom
     ClientHeight = 50
-    ClientWidth = 674
+    ClientWidth = 909
     TabOrder = 1
     object btPrevPage: TButton
       Left = 1
@@ -228,7 +258,7 @@ object fmMain: TfmMain
       Height = 48
       Hint = 'F2'
       Top = 1
-      Width = 352
+      Width = 587
       Align = alClient
       Alignment = taCenter
       Caption = '1'
@@ -238,7 +268,7 @@ object fmMain: TfmMain
       ParentFont = False
     end
     object btNextPage: TButton
-      Left = 513
+      Left = 748
       Height = 48
       Hint = 'F6'
       Top = 1
@@ -253,11 +283,11 @@ object fmMain: TfmMain
     Left = 0
     Height = 24
     Top = 0
-    Width = 674
+    Width = 909
     Align = alTop
     Caption = 'panTop'
     ClientHeight = 24
-    ClientWidth = 674
+    ClientWidth = 909
     TabOrder = 2
     object panCategory: TPanel
       Left = 1
@@ -300,32 +330,66 @@ object fmMain: TfmMain
         Text = 'edCategory'
       end
     end
-    object panOtherAttrs: TPanel
+    object panCaption: TPanel
       Left = 221
       Height = 22
       Top = 1
-      Width = 452
+      Width = 432
       Align = alClient
+      Caption = 'panCaption'
       ClientHeight = 22
-      ClientWidth = 452
+      ClientWidth = 432
       TabOrder = 1
+      object edCaption: TComboBox
+        Left = 64
+        Height = 20
+        Top = 1
+        Width = 367
+        Align = alClient
+        AutoComplete = True
+        AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
+        ItemHeight = 0
+        OnChange = edCaptionChange
+        OnKeyDown = edCaptionKeyDown
+        PopupMenu = pmCaption
+        TabOrder = 0
+      end
+      object lbCaptionForRq: TLabel
+        Left = 1
+        Height = 20
+        Top = 1
+        Width = 63
+        Align = alLeft
+        Caption = 'Заголовок'
+        ParentColor = False
+      end
+    end
+    object panOtherAttrs: TPanel
+      Left = 653
+      Height = 22
+      Top = 1
+      Width = 255
+      Align = alRight
+      ClientHeight = 22
+      ClientWidth = 255
+      TabOrder = 2
       object chkLabel: TCheckBox
-        Left = 200
+        Left = 1
         Height = 20
         Top = 1
         Width = 64
-        Align = alRight
+        Align = alLeft
         Caption = 'Метка'
         OnChange = chkLabelChange
         TabOrder = 0
         Visible = False
       end
       object edLabels: TComboBox
-        Left = 264
+        Left = 65
         Height = 20
         Top = 1
-        Width = 160
-        Align = alRight
+        Width = 162
+        Align = alClient
         AutoComplete = True
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
         ItemHeight = 0
@@ -334,33 +398,19 @@ object fmMain: TfmMain
         TabOrder = 1
         Visible = False
       end
-      object edCaption: TComboBox
-        Left = 1
-        Height = 20
-        Top = 1
-        Width = 199
-        Align = alClient
-        AutoComplete = True
-        AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
-        ItemHeight = 0
-        OnChange = edCaptionChange
-        OnKeyDown = edCaptionKeyDown
-        PopupMenu = pmCaption
-        TabOrder = 2
-      end
       object btPossibleLabels: TButton
-        Left = 424
+        Left = 227
         Height = 20
         Top = 1
         Width = 27
         Align = alRight
         Caption = '...'
         OnClick = btPossibleLabelsClick
-        TabOrder = 3
+        TabOrder = 2
         Visible = False
       end
     end
-    object Splitter3: TSplitter
+    object Splitter7: TSplitter
       Left = 216
       Height = 22
       Top = 1
@@ -369,11 +419,11 @@ object fmMain: TfmMain
   end
   object leftPanel: TPanel
     Left = 0
-    Height = 365
+    Height = 368
     Top = 24
     Width = 195
     Align = alLeft
-    ClientHeight = 365
+    ClientHeight = 368
     ClientWidth = 195
     TabOrder = 3
     object lbFavourites: TLabel
@@ -387,7 +437,7 @@ object fmMain: TfmMain
     end
     object lbFav: TStringGrid
       Left = 1
-      Height = 187
+      Height = 190
       Top = 177
       Width = 193
       Align = alClient
@@ -442,14 +492,14 @@ object fmMain: TfmMain
   end
   object Splitter1: TSplitter
     Left = 195
-    Height = 365
+    Height = 368
     Top = 24
     Width = 5
     OnMoved = Splitter1Moved
   end
   object Splitter2: TSplitter
-    Left = 507
-    Height = 365
+    Left = 742
+    Height = 368
     Top = 24
     Width = 5
     Align = alRight
