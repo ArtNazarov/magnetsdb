@@ -9,7 +9,7 @@ uses
   Interfaces, FileUtil, SysUtils, // this includes the LCL widgetset
   Forms, dbflaz, main, add_magnet_gui, gui_importer_csv, gui_editor, delete_gui,
   gui_ini_files, localization, init_gui, magnets_constants,
-  uniqueinstanceraw, wndgrid
+  uniqueinstanceraw, wndgrid, labels_helper
   (*, internal_browser *)
   { you can add units after this };
 

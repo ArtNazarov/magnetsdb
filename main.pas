@@ -27,7 +27,8 @@ uses
   magnets_constants,
   viewsingle_gui,
   magnets_entity, UniqueInstance,
-  wndgrid
+  wndgrid,
+  labels_helper
  (*, internal_browser *), Types;
 
 const
@@ -49,6 +50,7 @@ type
     btMultiSelect: TButton;
     btPossibleLabels: TButton;
     btPossibleLabelsApply: TButton;
+    btLoadLabels: TButton;
     ccCategory: TCheckListBox;
     possibleLabels: TListBox;
     chkCategory: TCheckBox;
@@ -139,6 +141,7 @@ type
     tmSQL: TTimer;
     UniqueInstance1: TUniqueInstance;
 
+    procedure btLoadLabelsClick(Sender: TObject);
     procedure btMultiSelectClick(Sender: TObject);
     procedure btnClearUserHistoryClick(Sender: TObject);
     procedure btPossibleLabelsApplyClick(Sender: TObject);
@@ -310,6 +313,7 @@ type
     procedure tofirstpage();
 
     function getTrList() : String;
+    procedure load_labels_by_category();
 
   end;
 
@@ -753,6 +757,53 @@ begin
     Result:=add_tr;
 end;
 
+procedure TfmMain.load_labels_by_category;
+var x : LabelsManager; i, j : integer; w : TStringList;
+begin
+ possibleLabels.Clear;
+ x:=LabelsManager.Create();
+ w:=TStringList.Create();
+
+ x.filename:='main-sqlite.db';
+ x.table:='data';
+
+
+ x.init_labels_list();
+
+ Split(';', edCategory.Text, w);
+
+
+
+ for j:=0 to w.Count-1 do begin
+ Application.ProcessMessages;
+ x.loadLabels(w[j]);
+
+ for i:=0 to x.labels_list.count-1 do
+   begin
+     Application.ProcessMessages;
+     if possibleLabels.Items.IndexOf(x.labels_list[i])=-1 then
+       if Length(x.labels_list[i])>=3 then
+         if (Pos('+', x.labels_list[i]) = 0) and
+            (Pos('|', x.labels_list[i]) = 0) and
+            (Pos('/', x.labels_list[i]) = 0) and
+            (Pos('\', x.labels_list[i]) = 0) and
+            (Pos(',', x.labels_list[i]) = 0) and
+            (Pos('-', x.labels_list[i]) = 0) and
+            (Pos('''', x.labels_list[i]) = 0) and
+            (Pos('!', x.labels_list[i]) = 0) and
+            (Pos('-', x.labels_list[i]) = 0) and
+            (Pos(':', x.labels_list[i]) = 0) and
+            (Pos('.', x.labels_list[i]) = 0) then
+        possibleLabels.Items.Add(x.labels_list[i]);
+   end;
+end;
+ x.free_labels_list();
+
+ x.Free;
+ w.free;
+end;
+
+
 
 
 procedure TfmMain.initsettings;
@@ -1067,6 +1118,8 @@ begin
           possibleLabels.Items.LoadFromFile(plFilename);
      end;
 
+  load_labels_by_category();
+
 end;
 
 
@@ -1158,6 +1211,11 @@ begin
   ccCategory.Visible:=not ccCategory.Visible;
 end;
 
+procedure TfmMain.btLoadLabelsClick(Sender: TObject);
+begin
+  load_labels_by_category();
+end;
+
 procedure TfmMain.btPrevPageClick(Sender: TObject);
 begin
   prevpageaction();
@@ -1229,6 +1287,10 @@ begin
   dontchangelist:=true;
   edCategory.text:=r;
   dontchangelist:=false;
+
+  // TODO: optionally by settings.ini
+  load_labels_by_category();
+
 end;
 
 procedure TfmMain.ccCategoryDblClick(Sender: TObject);
@@ -1995,7 +2057,8 @@ var
   aBackground : TColor;
   fs : TFontStyle;
 begin
-
+ if possibleLabels.Items[Index]<>'' then
+ begin
  c:=possibleLabels.Items[Index][1];
  case c of
       '-' :   begin
@@ -2024,6 +2087,7 @@ with possibleLabels do
  Canvas.Font.Style:=[fs];
  Canvas.TextRect(ARect, 2, ARect.Top+2, Items[Index]);
            end;
+ end;
 end;
 
 

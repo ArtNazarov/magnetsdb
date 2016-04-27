@@ -143,6 +143,7 @@ if  labels <> '' then
 
           if i=0 then
            begin
+
            if (l[i][1]<>'-') then
             // Inclusion
             case mode of
