@@ -1,7 +1,7 @@
 object fmMain: TfmMain
-  Left = -439
+  Left = 94
   Height = 463
-  Top = 115
+  Top = 219
   Width = 909
   ActiveControl = panTop
   Caption = 'magnetsdb'

@@ -800,6 +800,16 @@ begin
             (Pos('!', x.labels_list[i]) = 0) and
             (Pos('-', x.labels_list[i]) = 0) and
             (Pos(':', x.labels_list[i]) = 0) and
+            (Pos('&', x.labels_list[i]) = 0) and
+            (Pos('#', x.labels_list[i]) = 0) and
+            (Pos('(', x.labels_list[i]) = 0) and
+            (Pos(')', x.labels_list[i]) = 0) and
+            (Pos('{', x.labels_list[i]) = 0) and
+            (Pos('}', x.labels_list[i]) = 0) and
+            (Pos('[', x.labels_list[i]) = 0) and
+            (Pos(']', x.labels_list[i]) = 0) and
+            (Pos('%', x.labels_list[i]) = 0) and
+            (Pos(';', x.labels_list[i]) = 0) and
             (Pos('.', x.labels_list[i]) = 0) then
         possibleLabels.Items.Add(x.labels_list[i]);
    end;
