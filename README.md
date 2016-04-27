@@ -4,6 +4,7 @@ What's new
 - Stop words e.g search request "-Third;Thing" will find
 "Thing First", "Second Thing" but not "Third Thing" or "Thing Third"
 (available for requests by captions or labels)
+- Autoload labels on changing category
 
 How to build app from sources
 ===========================
@@ -44,7 +45,11 @@ It's just compact CRUD wrapper.
 Screenshots
 ==========================
 
-Current version with English interface
+Current version
+
+![screenshot](https://dl.dropbox.com/s/ygtziluwiraecu7/VERSION_FILTER_LABELS.png)
+
+Previous version with English interface
 
 - Adding
 

@@ -5,6 +5,7 @@
 из выдачи "Third Thing", "Thing Third" (даже
 если таковые есть), но будет искать "Thing One", "Secong Thing" 
 и т.п. (доступно для запросов по заголовкам и меткам)
+- Автоматическая загрузка меток при смене категории
 
 Как собрать приложение из исходников
 ===========================
@@ -51,6 +52,8 @@ https://github.com/blikblum/luipack/tree/master/uniqueinstance
 ==========================
 
 Текущая версия
+
+![screenshot](https://dl.dropbox.com/s/ygtziluwiraecu7/VERSION_FILTER_LABELS.png)
 
 - Поиск по категории и названию
 
