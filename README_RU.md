@@ -5,7 +5,6 @@
 из выдачи "Third Thing", "Thing Third" (даже
 если таковые есть), но будет искать "Thing One", "Secong Thing" 
 и т.п. (доступно для запросов по заголовкам и меткам)
-- Автоматическая загрузка меток при смене категории
 
 Как собрать приложение из исходников
 ===========================
@@ -52,8 +51,6 @@ https://github.com/blikblum/luipack/tree/master/uniqueinstance
 ==========================
 
 Текущая версия
-
-![screenshot](https://dl.dropbox.com/s/ygtziluwiraecu7/VERSION_FILTER_LABELS.png)
 
 - Поиск по категории и названию
 
@@ -137,6 +134,9 @@ https://github.com/blikblum/luipack/tree/master/uniqueinstance
 построчно перечислите в этом файле необходимые трекеры. Вы можете найти эти списки в Сети, н-р 
 http://bitmapcake.blogspot.ru/2015/05/list-of-working-torrent-trackers-2015-may.html,
 https://www.reddit.com/r/opentrackerproject/comments/3pynqy/tracker_list_report_october_23_2015/ и др.
+
+Настоятельно рекомендуем устанавливать программу на ram диск, см. инструкции для linux
+http://www.hecticgeek.com/2015/12/create-ram-disk-ubuntu-linux/
 
 Установка
 ======================

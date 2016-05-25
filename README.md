@@ -1,10 +1,9 @@
 What's new
 ===========================
 - Search in several categories
-- Stop words e.g search request "-Third;Thing" will find
-"Thing First", "Second Thing" but not "Third Thing" or "Thing Third"
+- Stop words e.g search request "-Third;Quest" will find
+"Thine First", "Second Thing" but not "Third Quest" or "Quest Third"
 (available for requests by captions or labels)
-- Autoload labels on changing category
 
 How to build app from sources
 ===========================
@@ -45,11 +44,7 @@ It's just compact CRUD wrapper.
 Screenshots
 ==========================
 
-Current version
-
-![screenshot](https://dl.dropbox.com/s/ygtziluwiraecu7/VERSION_FILTER_LABELS.png)
-
-Previous version with English interface
+Current version with English interface
 
 - Adding
 
@@ -156,6 +151,9 @@ create file named tr.txt and put on each line required announcers.
 You can find many different lists of announcers at the WWW,
 for examples: http://bitmapcake.blogspot.ru/2015/05/list-of-working-torrent-trackers-2015-may.html,
 https://www.reddit.com/r/opentrackerproject/comments/3pynqy/tracker_list_report_october_23_2015/ etc
+
+Strongly recommended to install app into the RAM drive, see instructions for linuxhttp://www.hecticgeek.com/2015/12/create-ram-disk-ubuntu-linux/
+
 
 Installation
 ======================

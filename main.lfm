@@ -1,11 +1,11 @@
 object fmMain: TfmMain
-  Left = 94
-  Height = 463
-  Top = 219
+  Left = 56
+  Height = 514
+  Top = 97
   Width = 909
   ActiveControl = panTop
   Caption = 'magnetsdb'
-  ClientHeight = 442
+  ClientHeight = 494
   ClientWidth = 909
   KeyPreview = True
   Menu = fmMenu
@@ -20,11 +20,11 @@ object fmMain: TfmMain
   WindowState = wsMaximized
   object rightPanel: TPanel
     Left = 747
-    Height = 368
+    Height = 420
     Top = 24
     Width = 162
     Align = alRight
-    ClientHeight = 368
+    ClientHeight = 420
     ClientWidth = 162
     TabOrder = 0
     OnClick = rightPanelClick
@@ -79,11 +79,11 @@ object fmMain: TfmMain
     end
     object panMainOps: TPanel
       Left = 1
-      Height = 226
+      Height = 278
       Top = 141
       Width = 160
       Align = alClient
-      ClientHeight = 226
+      ClientHeight = 278
       ClientWidth = 160
       TabOrder = 1
       object btPrevSQL: TButton
@@ -98,8 +98,8 @@ object fmMain: TfmMain
       end
       object mmDebug: TMemo
         Left = 1
-        Height = 36
-        Top = 225
+        Height = 46
+        Top = 231
         Width = 158
         Align = alClient
         ScrollBars = ssAutoBoth
@@ -191,17 +191,17 @@ object fmMain: TfmMain
   end
   object panCenter: TPanel
     Left = 200
-    Height = 368
+    Height = 420
     Top = 24
     Width = 542
     Align = alClient
     Caption = 'panCenter'
-    ClientHeight = 368
+    ClientHeight = 420
     ClientWidth = 542
     TabOrder = 4
     object sqlGrid: TDBGrid
       Left = 1
-      Height = 366
+      Height = 418
       Top = 1
       Width = 540
       Align = alClient
@@ -235,7 +235,7 @@ object fmMain: TfmMain
   object bottomPanel: TPanel
     Left = 0
     Height = 50
-    Top = 392
+    Top = 444
     Width = 909
     Align = alBottom
     ClientHeight = 50
@@ -341,10 +341,10 @@ object fmMain: TfmMain
       ClientWidth = 432
       TabOrder = 1
       object edCaption: TComboBox
-        Left = 64
+        Left = 62
         Height = 20
         Top = 1
-        Width = 367
+        Width = 369
         Align = alClient
         AutoComplete = True
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
@@ -358,7 +358,7 @@ object fmMain: TfmMain
         Left = 1
         Height = 20
         Top = 1
-        Width = 63
+        Width = 61
         Align = alLeft
         Caption = 'Заголовок'
         ParentColor = False
@@ -419,16 +419,16 @@ object fmMain: TfmMain
   end
   object leftPanel: TPanel
     Left = 0
-    Height = 368
+    Height = 420
     Top = 24
     Width = 195
     Align = alLeft
-    ClientHeight = 368
+    ClientHeight = 420
     ClientWidth = 195
     TabOrder = 3
     object lbFavourites: TLabel
       Left = 1
-      Height = 17
+      Height = 16
       Top = 160
       Width = 193
       Align = alTop
@@ -437,8 +437,8 @@ object fmMain: TfmMain
     end
     object lbFav: TStringGrid
       Left = 1
-      Height = 190
-      Top = 177
+      Height = 243
+      Top = 176
       Width = 193
       Align = alClient
       AutoEdit = False
@@ -492,14 +492,14 @@ object fmMain: TfmMain
   end
   object Splitter1: TSplitter
     Left = 195
-    Height = 368
+    Height = 420
     Top = 24
     Width = 5
     OnMoved = Splitter1Moved
   end
   object Splitter2: TSplitter
     Left = 742
-    Height = 368
+    Height = 420
     Top = 24
     Width = 5
     Align = alRight

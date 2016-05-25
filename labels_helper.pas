@@ -57,8 +57,10 @@ begin
   s:=dsSQL.DataSet.FieldByName('labels').AsString;
   temp:=TStringList.Create;
   Split(' ', s, temp);
+  Application.ProcessMessages;
   for i:=0 to temp.Count-1 do
       begin
+           Application.ProcessMessages;
            if labels_list.IndexOf(temp[i])=-1 then
               begin
                  labels_list.Add(temp[i]);
