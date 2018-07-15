@@ -55,6 +55,7 @@ type
     chkLabel: TCheckBox;
     edLabels: TComboBox;
     lbCaptionForRq: TLabel;
+    mnuSelectAll: TMenuItem;
     panCaption: TPanel;
     panPossibleLabels: TPanel;
     panMainOps: TPanel;
@@ -206,6 +207,7 @@ type
     procedure mnuHelpHotkeysClick(Sender: TObject);
     procedure mnuHelpWebSiteClick(Sender: TObject);
     procedure mnuLocalizationClick(Sender: TObject);
+    procedure mnuSelectAllClick(Sender: TObject);
     procedure mnuSettingsClick(Sender: TObject);
     procedure mnuTrListClick(Sender: TObject);
     procedure mnuViewSingleClick(Sender: TObject);
@@ -288,11 +290,11 @@ type
      md : TMagnets_Entity;
 
     procedure initsettings();
-    procedure save_settings_to_ini;
+    procedure save_settings_to_ini();
     procedure readsettings;
 
-    procedure initapplication;
-    procedure initinterface;
+    procedure initapplication();
+    procedure initinterface();
 
     procedure favToApp(app_index : integer);
     procedure dbToApp(app_index : integer);
@@ -333,7 +335,7 @@ implementation
 { TfmMain }
 
 
-procedure TfmMain.initapplication;
+procedure TfmMain.initapplication();
 var history_sql : TStringList;
 begin
 
@@ -370,11 +372,11 @@ begin
 m.m('init ended...');
 end;
 
-
 procedure TfmMain.initinterface();
 begin
 
 end;
+
 
 procedure TfmMain.favToApp(app_index: integer);
 var process: TAsyncProcess;
@@ -432,7 +434,10 @@ begin
             end;
 end;
 
-procedure TfmMain.colorize;
+
+
+
+procedure TfmMain.colorize();
 var i : Integer;
 begin
   if not chkCustomColors.Checked then Exit;
@@ -467,7 +472,7 @@ begin
   sqlGrid.Repaint;
 end;
 
-procedure TfmMain.rq;
+procedure TfmMain.rq();
 var sql : String; do_rq : boolean;
 begin
 
@@ -513,14 +518,14 @@ begin
 //     end;
 end;
 
-procedure TfmMain.disconnect;
+procedure TfmMain.disconnect();
 begin
    chkSearchOnChange.Checked:=false;
    tmSQL.Enabled:=false;
    md.disconnect();
 end;
 
-procedure TfmMain.connect_again;
+procedure TfmMain.connect_again();
 begin
 
    md.init_db();
@@ -535,7 +540,7 @@ begin
 
 end;
 
-procedure TfmMain.attrs_show;
+procedure TfmMain.attrs_show();
 begin
   panCategory.Visible:=lbAttrs.Checked;
   chkLabel.Visible:=lbAttrs.Checked;
@@ -605,7 +610,8 @@ begin
   ccCategory.Font.Size:=fs;
 end;
 
-procedure TfmMain.startApp;
+
+procedure TfmMain.startApp();
 var Inif : TIniFIle; i : integer;
 begin
 
@@ -649,7 +655,7 @@ attrs_show();
  Inif.Free;
 end;
 
-procedure TfmMain.stopApp;
+procedure TfmMain.stopApp();
 begin
   save_settings_to_ini();
   user_history.saveusersearches(edCaption);
@@ -665,7 +671,7 @@ begin
    FreeAndNil(CategoriesFullList);
 end;
 
-procedure TfmMain.reloadApp;
+procedure TfmMain.reloadApp();
 begin
   startApp();
   stopApp();
@@ -723,28 +729,29 @@ begin
       end;
 end;
 
-procedure TfmMain.prevpageaction;
+
+procedure TfmMain.prevpageaction();
 begin
   if md.page>1 then md.page:=md.page-1;
   if md.page=1 then btPrevPage.Enabled:=false;
   rq();
 end;
 
-procedure TfmMain.nextpageaction;
+procedure TfmMain.nextpageaction();
 begin
   if md.page>0 then btPrevPage.Enabled:=True;
   md.page:=md.page+1;
   rq();
 end;
 
-procedure TfmMain.tofirstpage;
+procedure TfmMain.tofirstpage();
 begin
   btPrevPage.Enabled:=False;
   md.page:=1;
   rq();
 end;
 
-function TfmMain.getTrList: String;
+function TfmMain.getTrList(): String;
 var
     add_tr : String;
     i  : Byte;
@@ -764,7 +771,7 @@ begin
     Result:=add_tr;
 end;
 
-procedure TfmMain.load_labels_by_category;
+procedure TfmMain.load_labels_by_category();
 var x : LabelsManager; i, j : integer; w : TStringList;
 begin
  possibleLabels.Clear;
@@ -823,7 +830,7 @@ end;
 
 
 
-procedure TfmMain.initsettings;
+procedure TfmMain.initsettings();
 var
    IniF:TINIFile;
    i : Byte;
@@ -941,7 +948,7 @@ begin
 
 end;
 
-procedure TfmMain.save_settings_to_ini;
+procedure TfmMain.save_settings_to_ini();
 var IniF:TINIFile;// Класс для работы с INI-файлами
   bs : String;
   k : Integer;
@@ -1839,6 +1846,18 @@ begin
         end;
 end;
 
+procedure TfmMain.mnuSelectAllClick(Sender: TObject);
+ var i: integer;
+begin
+  sqlGrid.SelectedRows.Clear;
+  sqlGrid.DataSource.DataSet.First;
+  for i := 0 to sqlGrid.DataSource.DataSet.RecordCount-1 do
+  begin
+    sqlGrid.SelectedRows.CurrentRowSelected := true;
+    sqlGrid.DataSource.DataSet.Next;
+  end;
+end;
+
 procedure TfmMain.mnuSettingsClick(Sender: TObject);
 var f : TfmIniEditor;
 begin
@@ -2252,7 +2271,7 @@ begin
      end;
 end;
 
-procedure TfmMain.resize_columns_of_grids;
+procedure TfmMain.resize_columns_of_grids();
 var i : 0..3;
 begin
 
@@ -2296,12 +2315,6 @@ begin
   fmMain.inserted_link:=Parameters[0];
   fmMain.do_action_on_start();
 end;
-
-
-
-
-
-
 
 
 end.

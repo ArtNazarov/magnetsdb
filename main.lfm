@@ -5,8 +5,9 @@ object fmMain: TfmMain
   Width = 909
   ActiveControl = panTop
   Caption = 'magnetsdb'
-  ClientHeight = 494
+  ClientHeight = 489
   ClientWidth = 909
+  DesignTimePPI = 120
   KeyPreview = True
   Menu = fmMenu
   OnClose = FormClose
@@ -16,15 +17,15 @@ object fmMain: TfmMain
   OnResize = FormResize
   Position = poDesktopCenter
   ShowHint = True
-  LCLVersion = '1.6.0.4'
+  LCLVersion = '1.8.4.0'
   WindowState = wsMaximized
   object rightPanel: TPanel
     Left = 747
-    Height = 420
+    Height = 415
     Top = 24
     Width = 162
     Align = alRight
-    ClientHeight = 420
+    ClientHeight = 415
     ClientWidth = 162
     TabOrder = 0
     OnClick = rightPanelClick
@@ -74,16 +75,15 @@ object fmMain: TfmMain
         Sorted = True
         Style = lbOwnerDrawFixed
         TabOrder = 2
-        TopIndex = -1
       end
     end
     object panMainOps: TPanel
       Left = 1
-      Height = 278
+      Height = 273
       Top = 141
       Width = 160
       Align = alClient
-      ClientHeight = 278
+      ClientHeight = 273
       ClientWidth = 160
       TabOrder = 1
       object btPrevSQL: TButton
@@ -98,8 +98,8 @@ object fmMain: TfmMain
       end
       object mmDebug: TMemo
         Left = 1
-        Height = 46
-        Top = 231
+        Height = 66
+        Top = 206
         Width = 158
         Align = alClient
         ScrollBars = ssAutoBoth
@@ -107,8 +107,8 @@ object fmMain: TfmMain
       end
       object chkStrictMode: TCheckBox
         Left = 1
-        Height = 26
-        Top = 78
+        Height = 21
+        Top = 68
         Width = 158
         Align = alTop
         Caption = 'Точные совпадения'
@@ -117,8 +117,8 @@ object fmMain: TfmMain
       end
       object chkCustomColors: TCheckBox
         Left = 1
-        Height = 26
-        Top = 205
+        Height = 21
+        Top = 185
         Width = 158
         Align = alTop
         Caption = 'Нестандартные цвета'
@@ -127,8 +127,8 @@ object fmMain: TfmMain
       end
       object chkSearchOnChange: TCheckBox
         Left = 1
-        Height = 26
-        Top = 52
+        Height = 21
+        Top = 47
         Width = 158
         Align = alTop
         Caption = 'Поиск по мере ввода'
@@ -137,7 +137,7 @@ object fmMain: TfmMain
       end
       object lbAttrs: TCheckBox
         Left = 1
-        Height = 26
+        Height = 21
         Top = 26
         Width = 158
         Align = alTop
@@ -147,8 +147,8 @@ object fmMain: TfmMain
       end
       object chkColorize: TCheckBox
         Left = 1
-        Height = 26
-        Top = 179
+        Height = 21
+        Top = 164
         Width = 158
         Align = alTop
         Caption = 'Альтернативная цветовая'
@@ -159,7 +159,7 @@ object fmMain: TfmMain
       object tbFontSize: TTrackBar
         Left = 1
         Height = 48
-        Top = 131
+        Top = 116
         Width = 158
         Max = 24
         Min = 8
@@ -171,7 +171,7 @@ object fmMain: TfmMain
       object btnClearUserHistory: TButton
         Left = 1
         Height = 27
-        Top = 104
+        Top = 89
         Width = 158
         Align = alTop
         Caption = 'Сброс истории поиска'
@@ -191,17 +191,17 @@ object fmMain: TfmMain
   end
   object panCenter: TPanel
     Left = 200
-    Height = 420
+    Height = 415
     Top = 24
     Width = 542
     Align = alClient
     Caption = 'panCenter'
-    ClientHeight = 420
+    ClientHeight = 415
     ClientWidth = 542
     TabOrder = 4
     object sqlGrid: TDBGrid
       Left = 1
-      Height = 418
+      Height = 413
       Top = 1
       Width = 540
       Align = alClient
@@ -235,7 +235,7 @@ object fmMain: TfmMain
   object bottomPanel: TPanel
     Left = 0
     Height = 50
-    Top = 444
+    Top = 439
     Width = 909
     Align = alBottom
     ClientHeight = 50
@@ -302,7 +302,7 @@ object fmMain: TfmMain
         Left = 1
         Height = 20
         Top = 1
-        Width = 88
+        Width = 87
         Align = alLeft
         Caption = 'Категория'
         OnChange = chkCategoryChange
@@ -319,10 +319,10 @@ object fmMain: TfmMain
         TabOrder = 1
       end
       object edCategory: TEdit
-        Left = 89
+        Left = 88
         Height = 20
         Top = 1
-        Width = 95
+        Width = 96
         Align = alClient
         OnChange = edCategoryChange
         OnEditingDone = edCategoryEditingDone
@@ -341,14 +341,14 @@ object fmMain: TfmMain
       ClientWidth = 432
       TabOrder = 1
       object edCaption: TComboBox
-        Left = 62
-        Height = 20
+        Left = 64
+        Height = 25
         Top = 1
-        Width = 369
+        Width = 367
         Align = alClient
         AutoComplete = True
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
-        ItemHeight = 0
+        ItemHeight = 17
         OnChange = edCaptionChange
         OnKeyDown = edCaptionKeyDown
         PopupMenu = pmCaption
@@ -358,7 +358,7 @@ object fmMain: TfmMain
         Left = 1
         Height = 20
         Top = 1
-        Width = 61
+        Width = 63
         Align = alLeft
         Caption = 'Заголовок'
         ParentColor = False
@@ -377,7 +377,7 @@ object fmMain: TfmMain
         Left = 1
         Height = 20
         Top = 1
-        Width = 64
+        Width = 63
         Align = alLeft
         Caption = 'Метка'
         OnChange = chkLabelChange
@@ -385,14 +385,14 @@ object fmMain: TfmMain
         Visible = False
       end
       object edLabels: TComboBox
-        Left = 65
-        Height = 20
+        Left = 64
+        Height = 25
         Top = 1
-        Width = 162
+        Width = 163
         Align = alClient
         AutoComplete = True
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
-        ItemHeight = 0
+        ItemHeight = 17
         OnChange = edLabelsChange
         OnKeyDown = edLabelsKeyDown
         TabOrder = 1
@@ -419,16 +419,16 @@ object fmMain: TfmMain
   end
   object leftPanel: TPanel
     Left = 0
-    Height = 420
+    Height = 415
     Top = 24
     Width = 195
     Align = alLeft
-    ClientHeight = 420
+    ClientHeight = 415
     ClientWidth = 195
     TabOrder = 3
     object lbFavourites: TLabel
       Left = 1
-      Height = 16
+      Height = 17
       Top = 160
       Width = 193
       Align = alTop
@@ -437,8 +437,8 @@ object fmMain: TfmMain
     end
     object lbFav: TStringGrid
       Left = 1
-      Height = 243
-      Top = 176
+      Height = 237
+      Top = 177
       Width = 193
       Align = alClient
       AutoEdit = False
@@ -477,7 +477,6 @@ object fmMain: TfmMain
       OnDblClick = ccCategoryDblClick
       OnItemClick = ccCategoryItemClick
       TabOrder = 1
-      TopIndex = -1
       Visible = False
     end
     object Splitter4: TSplitter
@@ -492,14 +491,14 @@ object fmMain: TfmMain
   end
   object Splitter1: TSplitter
     Left = 195
-    Height = 420
+    Height = 415
     Top = 24
     Width = 5
     OnMoved = Splitter1Moved
   end
   object Splitter2: TSplitter
     Left = 742
-    Height = 420
+    Height = 415
     Top = 24
     Width = 5
     Align = alRight
@@ -512,6 +511,10 @@ object fmMain: TfmMain
     object pmAddToFav: TMenuItem
       Caption = 'В избранное'
       OnClick = pmAddToFavClick
+    end
+    object mnuSelectAll: TMenuItem
+      Caption = 'Выделить все'
+      OnClick = mnuSelectAllClick
     end
     object mnuViewSingle: TMenuItem
       Caption = 'Карточка'

@@ -1,5 +1,6 @@
 What's new
 ===========================
+- Select all
 - Search in several categories
 - Stop words e.g search request "-Third;Quest" will find
 "Thine First", "Second Thing" but not "Third Quest" or "Quest Third"
